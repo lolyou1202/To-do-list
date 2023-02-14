@@ -13,7 +13,8 @@ html {
 }
 
 .App {
-  padding: 50px 30px 30px 30px;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .header {
@@ -23,6 +24,8 @@ html {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  margin-top: 30px;
+  padding: 0 30px;
 }
 .header .day {
   font-weight: 700;
@@ -38,13 +41,15 @@ html {
   color: #c2c2c2;
 }
 .header .calendar-ico svg {
+  cursor: pointer;
   width: 24px;
   height: 24px;
-  stroke: #c2c2c2;
+  stroke: #B5C1DB;
 }
 
 .main .search {
   position: relative;
+  padding: 0 30px;
   margin: 20px 0;
 }
 .main .search-input {
@@ -52,7 +57,8 @@ html {
   height: 30px;
   border: none;
   border-radius: 50px;
-  background: #AA96DA;
+  background: -webkit-gradient(linear, left top, right top, from(#7bbfff), to(#2471FF));
+  background: linear-gradient(to right, #7bbfff, #2471FF);
   font-weight: 400;
   font-size: 14px;
   color: #fff;
@@ -127,4 +133,187 @@ html {
   stroke: #fff;
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
+}
+.main .stages {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 0 30px 14px 30px;
+  gap: 10px;
+  list-style: none;
+}
+.main .stages__item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 30px;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 100%;
+  color: #212121;
+  padding: 0 15px;
+  border-radius: 50px;
+  cursor: pointer;
+}
+.main .stages__item.active {
+  background: #CCDFFF;
+  color: #497DC9;
+}
+.main .toDo__list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: calc(100vh - 284px);
+  overflow-y: scroll;
+  padding: 6px 30px 20px 30px;
+}
+.main .toDo__list::-webkit-scrollbar {
+  display: none;
+}
+.main .toDo__task {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  overflow: hidden;
+  cursor: pointer;
+  padding: 20px 10px;
+  border-radius: 10px;
+  background: #fff;
+  -webkit-box-shadow: 0px 2px 6px 1px rgba(34, 60, 80, 0.2);
+          box-shadow: 0px 2px 6px 1px rgba(34, 60, 80, 0.2);
+}
+.main .toDo__task .task-colorMark {
+  position: absolute;
+  top: 24px;
+  left: 20px;
+  width: 10px;
+  height: 10px;
+  background: #497DC9;
+  border-radius: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+}
+.main .toDo__task .task-priority {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background: #497DC9;
+  width: 15px;
+  height: 15px;
+  border-radius: 0 10px 0 0;
+}
+.main .toDo__task .task-content {
+  margin-left: 30px;
+}
+.main .toDo__task .task-name {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 100%;
+  color: #212121;
+  margin-bottom: 15px;
+}
+.main .toDo__task .task-description {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 100%;
+  color: #c2c2c2;
+}
+.main .toDo__task .task-contact {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.main .toDo__task .task-time {
+  text-align: right;
+  display: block;
+  font-weight: 400;
+  font-size: 12px;
+  color: #c2c2c2;
+  line-height: 100%;
+}
+.main .toDo__task .task-invited {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  list-style: none;
+}
+.main .toDo__task .task-invited-person {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  background: url(../../Image/person-1.jpg) no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.main .toDo__task:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.newTask {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: absolute;
+  bottom: 0;
+  height: 60px;
+  width: 100%;
+  border: none;
+  border-radius: 30px 30px 0 0;
+  background: #2471FF;
+  cursor: pointer;
+}
+.newTask .plus-ico {
+  background: #fff;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+.newTask .plus-ico svg {
+  width: 30px;
+  height: 30px;
+  stroke: #2471FF;
+}
+.newTask p {
+  font-weight: 400;
+  font-size: 18px;
+  color: #fff;
+  line-height: 100%;
+  margin-left: 10px;
 }

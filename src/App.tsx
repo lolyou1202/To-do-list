@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { ReactSVG } from "react-svg";
 
-function App() {
+export default function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header className="header">
+        <div>
+          <h1 className="day">Today</h1>
+          <p className="date">18 Jun 2023, Tuesday</p>
+        </div>
+        <ReactSVG
+          className="calendar-ico"
+          src={require('../src/Image/calendar-ico.svg').default}
+        />
       </header>
+      <main className="main">
+        <div className="search">
+          <input type="text" className="search-input" placeholder="Search" />
+          <ReactSVG
+            className="search-ico"
+            src={require('../src/Image/search-ico.svg').default}
+          />
+        </div>
+      </main>
+      <div className="newTask"></div>
     </div>
   );
 }
-
-export default App;

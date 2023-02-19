@@ -1,7 +1,32 @@
+import { useState } from "react";
 import { ReactSVG } from "react-svg";
+import { NewTaskActionsList } from "./Components/NewTaskActionsList";
+import Priority from "./Components/Priority";
+import TextareaItem from "./Components/TextareaItem";
+import { actionsContetnt } from "./types/types";
 
 export default function App() {
-
+  const [nameToDoState, setNameToDoState] = useState("");
+  const [descriptionToDoState, setDescriptionToDoState] = useState("");
+  const [actionsState, setActionsState] = useState<actionsContetnt[]>([
+    {
+      text: "Meeteng",
+      background: "",
+    },
+    {
+      text: "Design project",
+      background: "",
+    },
+    {
+      text: "Marketing",
+      background: "",
+    },
+    {
+      text: "Review",
+      background: "",
+    },
+  ]);
+  console.log(actionsState)
   return (
     <div className="App">
       <header className="header">
@@ -11,7 +36,7 @@ export default function App() {
         </div>
         <ReactSVG
           className="calendar-ico"
-          src={require('../src/Image/calendar-ico.svg').default}
+          src={require("./Image/calendar-ico.svg").default}
         />
       </header>
       <main className="main">
@@ -19,7 +44,7 @@ export default function App() {
           <input type="text" className="search-input" placeholder="Search" />
           <ReactSVG
             className="search-ico"
-            src={require('../src/Image/search-ico.svg').default}
+            src={require("./Image/search-ico.svg").default}
           />
         </div>
         <ul className="stages">
@@ -199,12 +224,63 @@ export default function App() {
       <button className="newTask">
         <ReactSVG
           className="plus-ico"
-          src={require('../src/Image/plus-ico.svg').default}
+          src={require("./Image/plus-ico.svg").default}
         />
         <p>Add new task</p>
       </button>
-      <div className="newTask-modal">
-        
+      <div className="wrapper-modal">
+        <div className="newTask-modal active">
+          <div className="newTask__block newTask__mainInfo">
+            <div
+              className={
+                "newTask__mainInfo-block" + (nameToDoState ? "" : " cursor")
+              }
+            >
+              <TextareaItem
+                state={nameToDoState}
+                setState={setNameToDoState}
+                placeholder="What do you need to do?"
+              />
+            </div>
+            <NewTaskActionsList
+              state={actionsState}
+              setState={setActionsState}
+            />
+            <div
+              className={
+                "newTask__mainInfo-block" +
+                (descriptionToDoState ? "" : " cursor")
+              }
+            >
+              <TextareaItem
+                state={descriptionToDoState}
+                setState={setDescriptionToDoState}
+                placeholder="Enter a description"
+              />
+            </div>
+          </div>
+          <Priority />
+          <div className="newTask__block newTask__invite">
+            <p>Invite</p>
+            <ul className="newTask__invite-list">
+              <li className="newTask__invite-persone"></li>
+              <li className="newTask__invite-persone"></li>
+              <li className="newTask__invite-persone"></li>
+              <li className="newTask__invite-persone"></li>
+              <li className="newTask__invite-newPersone">
+                <ReactSVG
+                  className="add-person"
+                  src={require("./Image/plus-ico.svg").default}
+                />
+              </li>
+            </ul>
+          </div>
+          <div className="newTask__buttons-block">
+            <button className="newTask__buttons recurring">Recurring</button>
+            <button className="newTask__buttons save">Save</button>
+          </div>
+          <div className="navButton"></div>
+        </div>
       </div>
     </div>
   );

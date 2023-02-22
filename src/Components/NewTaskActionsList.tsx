@@ -67,6 +67,7 @@ export const NewTaskActionsList: React.FC<NewTaskActionsListProps> = ({
       const newItem: actionsContetnt = {
         text: event.currentTarget.value,
         background: bacgroundActions[rand],
+        picked: false
       };
       bacgroundActions.splice(rand, 1);
       setState([...state, newItem]);
@@ -85,10 +86,9 @@ export const NewTaskActionsList: React.FC<NewTaskActionsListProps> = ({
       {state.map((item, index) => {
         return (
           <NewTaskAction
-            action={state[index].text}
-            background={state[index].background}
-            actionsState={[state, setState]}
-            index={index}
+            item={item}
+            state={state}
+            setState={setState}
             key={index}
           />
         );

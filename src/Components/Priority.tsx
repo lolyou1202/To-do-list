@@ -1,8 +1,11 @@
-import { useRef, useState } from "react"
+import { useRef } from "react"
 
-const Priority: React.FC = () => {
-    const [priority, setPriority] = useState('Hight')
+interface PriorityProps {
+    priority: string
+    setPriority: (value: string) => void
+}
 
+const Priority: React.FC<PriorityProps> = ({priority, setPriority}) => {
     const track = useRef(null)
 
     function handlerChange (e: React.MouseEvent<HTMLElement>) {

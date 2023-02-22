@@ -2,34 +2,53 @@ import { ReactSVG } from "react-svg";
 import { actionsContetnt } from "../types/types";
 
 interface NewTaskActionProps {
-  action: string
-  background: string
-  actionsState: [actionsContetnt[], (value: actionsContetnt[]) => void]
-  index: number
+  state: actionsContetnt[];
+  setState: (value: actionsContetnt[]) => void;
+  item: actionsContetnt;
 }
 
-export const NewTaskAction: React.FC<NewTaskActionProps> = ({action, background, actionsState, index}) => {
-  let state = actionsState[0]
-  let setState = actionsState[1]
-  
+export const NewTaskAction: React.FC<NewTaskActionProps> = ({
+  state,
+  setState,
+  item,
+}) => {
   const actionClickHandler = () => {
+    const addPickedAction = [...state].map((i) => {
+      if (i === item) {
+        i.picked = !i.picked;
+      } else {
+        i.picked = false;
+      }
+      return i;
+    });
+    setState(addPickedAction);
+  };
 
-  }
+  const closeActionClickHandler = (e: React.MouseEvent) => {
+    e.stopPropagation();
 
-  const closeActionClickHandler = () => {
-    const newActionList = [...state].filter((item, i) => i !== index)
-    setState(newActionList)
-  }
+    const newActionList = [...state].filter((i) => {
+      if (i === item) {
+        return false;
+      } else {
+        return true;
+      }
+    });
+    setState(newActionList);
+  };
 
   return (
-    <li className="newTask__mainInfo-action" style={{background: `${background}`}} onClick={actionClickHandler}>
-      <p>{action}</p>
+    <li
+      className={"newTask__mainInfo-action" + (item.picked ? " active" : "")}
+      style={{ background: `${item.background}` }}
+      onClick={actionClickHandler}
+    >
+      <p>{item.text}</p>
       <ReactSVG
         className="close-ico"
-        src={require('../Image/close-ico.svg').default}
+        src={require("../Image/close-ico.svg").default}
         onClick={closeActionClickHandler}
       />
     </li>
-  )
-}
-
+  );
+};

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ReactSVG } from "react-svg";
 import { NewTaskActionsList } from "./Components/NewTaskActionsList";
+import { NewTaskPersoneList } from "./Components/NewTaskPersoneList";
 import Priority from "./Components/Priority";
 import TextareaItem from "./Components/TextareaItem";
 import { actionsContetnt } from "./types/types";
@@ -8,25 +9,84 @@ import { actionsContetnt } from "./types/types";
 export default function App() {
   const [nameToDoState, setNameToDoState] = useState("");
   const [descriptionToDoState, setDescriptionToDoState] = useState("");
+  const [priority, setPriority] = useState("Hight");
+  const [persons, setPersons] = useState([
+    {
+      name: "Alex",
+      avatar: "person-1.jpg",
+      picked: false
+    },
+    {
+      name: "Mila",
+      avatar: "person-2.jpg",
+      picked: false
+    },
+    {
+      name: "Anton",
+      avatar: "person-3.jpg",
+      picked: false
+    },
+    {
+      name: "Kira",
+      avatar: "person-4.jpg",
+      picked: false
+    },
+    {
+      name: "Den",
+      avatar: "person-5.jpg",
+      picked: false
+    },
+  ]);
+  const [totalpersons, setTotalpersons] = useState([
+    {
+      name: "Alex",
+      avatar: "person-1.jpg",
+      picked: false
+    },
+    {
+      name: "Mila",
+      avatar: "person-2.jpg",
+      picked: false
+    },
+    {
+      name: "Anton",
+      avatar: "person-3.jpg",
+      picked: false
+    },
+    {
+      name: "Kira",
+      avatar: "person-4.jpg",
+      picked: false
+    },
+    {
+      name: "Den",
+      avatar: "person-5.jpg",
+      picked: false
+    },
+  ]);
+  console.log(persons)
   const [actionsState, setActionsState] = useState<actionsContetnt[]>([
     {
       text: "Meeteng",
       background: "",
+      picked: false,
     },
     {
       text: "Design project",
       background: "",
+      picked: false,
     },
     {
       text: "Marketing",
       background: "",
+      picked: false,
     },
     {
       text: "Review",
       background: "",
+      picked: false,
     },
   ]);
-  console.log(actionsState)
   return (
     <div className="App">
       <header className="header">
@@ -259,21 +319,10 @@ export default function App() {
               />
             </div>
           </div>
-          <Priority />
+          <Priority priority={priority} setPriority={setPriority} />
           <div className="newTask__block newTask__invite">
             <p>Invite</p>
-            <ul className="newTask__invite-list">
-              <li className="newTask__invite-persone"></li>
-              <li className="newTask__invite-persone"></li>
-              <li className="newTask__invite-persone"></li>
-              <li className="newTask__invite-persone"></li>
-              <li className="newTask__invite-newPersone">
-                <ReactSVG
-                  className="add-person"
-                  src={require("./Image/plus-ico.svg").default}
-                />
-              </li>
-            </ul>
+            <NewTaskPersoneList personsState={persons} setPersonsState={setPersons} totalPersons={totalpersons} setTotalpersons={setTotalpersons} />
           </div>
           <div className="newTask__buttons-block">
             <button className="newTask__buttons recurring">Recurring</button>

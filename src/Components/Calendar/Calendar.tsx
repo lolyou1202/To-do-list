@@ -14,14 +14,20 @@ export const Calendar: FC<CalendarProps> = ({
   calendarModalState,
   setCalendarModalState,
 }) => {
-  const [calendarArray, setCalendarArray] = useState<arrayCalendar[]>([]);
-  console.log(calendarArray);
   let date = new Date();
-  let currentYear = date.getFullYear();
-  let currentMonth = date.getMonth();
-  let currentDate = date.getDate();
-  let currentHours = date.getHours();
-  let currentMins = date.getMinutes();
+
+  const [calendarArray, setCalendarArray] = useState<arrayCalendar[]>([]);
+  const [currentFirstDayInMonth, setCurrentFirstDayInMonth] = useState<Date>(
+    new Date(date.getFullYear(), date.getMonth(), 1)
+  );
+
+  //console.log(calendarArray);
+  //console.log(currentFirstDayInMonth);
+  let currentYear = currentFirstDayInMonth.getFullYear();
+  let currentMonth = currentFirstDayInMonth.getMonth();
+  let currentDate = currentFirstDayInMonth.getDate();
+  let currentHours = currentFirstDayInMonth.getHours();
+  let currentMins = currentFirstDayInMonth.getMinutes();
   let countDaysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
   let countDaysInPreviousMonth = new Date(
     currentYear,
@@ -31,15 +37,14 @@ export const Calendar: FC<CalendarProps> = ({
 
   const fillRows = (
     date: Date,
-    currentDate: number,
     countDaysInMonth: number,
     countDaysInPreviousMonth: number
   ) => {
-    let firstDayInMonth = date.getDate() + 6;
-    console.log(firstDayInMonth)
+    let firstDayInMonth = date.getDay() + 6;
     if (firstDayInMonth > 6) {
       firstDayInMonth = firstDayInMonth - 7;
     }
+    console.log(firstDayInMonth)
     let fillRows: arrayCalendar[] = Array.from(Array(42), () => ({
       id: 0,
       value: 0,
@@ -55,12 +60,24 @@ export const Calendar: FC<CalendarProps> = ({
           fillRows[i].id = i;
           fillRows[i].value = nextCount + 1;
           fillRows[i].classes = "notCurrentMonth";
-          if (!(i + 1 < firstDayInMonth)) {
-            nextCount = 0;
-          }
+          
         }
+        if (i === firstDayInMonth) {
+            nextCount = 1;
+          }
         if (i >= firstDayInMonth) {
-          if (nextCount === currentDate) {
+          if (
+            new Date(
+              date.getFullYear(),
+              date.getMonth(),
+              nextCount
+            ).getTime() ===
+            new Date(
+              new Date().getFullYear(),
+              new Date().getMonth(),
+              new Date().getDate()
+            ).getTime()
+          ) {
             fillRows[i].id = i;
             fillRows[i].value = nextCount;
             fillRows[i].classes = "today";
@@ -73,7 +90,18 @@ export const Calendar: FC<CalendarProps> = ({
       }
       if (i >= 7) {
         if (nextCount <= countDaysInMonth) {
-          if (nextCount === currentDate) {
+          if (
+            new Date(
+              date.getFullYear(),
+              date.getMonth(),
+              nextCount
+            ).getTime() ===
+            new Date(
+              new Date().getFullYear(),
+              new Date().getMonth(),
+              new Date().getDate()
+            ).getTime()
+          ) {
             fillRows[i].id = i;
             fillRows[i].value = nextCount;
             fillRows[i].classes = "today";
@@ -94,55 +122,75 @@ export const Calendar: FC<CalendarProps> = ({
   };
 
   const handlerPrevArrowClick = () => {
-    currentMonth = currentMonth - 1;
-    date = new Date(currentYear, currentMonth, 1);
-    //console.log(first)
-    let countDaysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-    let countDaysInPreviousMonth = new Date(
-      currentYear,
-      currentMonth,
+    setCurrentFirstDayInMonth(
+      new Date(
+        currentFirstDayInMonth.getFullYear(),
+        currentFirstDayInMonth.getMonth() - 1,
+        1
+      )
+    );
+    let newDate = new Date(
+      currentFirstDayInMonth.getFullYear(),
+      currentFirstDayInMonth.getMonth() - 1,
+      1
+    );
+    let countDaysInMonth = new Date(
+      currentFirstDayInMonth.getFullYear(),
+      currentFirstDayInMonth.getMonth(),
       0
     ).getDate();
+    let countDaysInPreviousMonth = new Date(
+      currentFirstDayInMonth.getFullYear(),
+      currentFirstDayInMonth.getMonth(),
+      0
+    ).getDate();
+
     setCalendarArray(
-      fillRows(
-        date,
-        currentDate,
-        countDaysInMonth,
-        countDaysInPreviousMonth
-      )
+      fillRows(newDate, countDaysInMonth, countDaysInPreviousMonth)
     );
   };
   const handlerNextArrowClick = () => {
-    currentMonth = currentMonth + 1;
-    date = new Date(currentYear, currentMonth, 1);
-    let countDaysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-    let countDaysInPreviousMonth = new Date(
-      currentYear,
-      currentMonth,
-      0
-    ).getDate();
-    setCalendarArray(
-      fillRows(
-        date,
-        currentDate,
-        countDaysInMonth,
-        countDaysInPreviousMonth
-      )
-    );
+    setCurrentFirstDayInMonth(
+        new Date(
+          currentFirstDayInMonth.getFullYear(),
+          currentFirstDayInMonth.getMonth() + 1,
+          1
+        )
+      );
+      let newDate = new Date(
+        currentFirstDayInMonth.getFullYear(),
+        currentFirstDayInMonth.getMonth() + 1,
+        1
+      );
+      let countDaysInMonth = new Date(
+        currentFirstDayInMonth.getFullYear(),
+        currentFirstDayInMonth.getMonth() + 2,
+        0
+      ).getDate();
+      let countDaysInPreviousMonth = new Date(
+        currentFirstDayInMonth.getFullYear(),
+        currentFirstDayInMonth.getMonth() + 1,
+        0
+      ).getDate();
+      console.log(new Date(currentFirstDayInMonth.getFullYear(),currentFirstDayInMonth.getMonth() + 1,1),
+        newDate, countDaysInMonth, countDaysInPreviousMonth
+    )
+      setCalendarArray(
+        fillRows(newDate, countDaysInMonth, countDaysInPreviousMonth)
+      );
   };
 
   useEffect(() => {
-    setDate([
-      currentYear,
-      currentMonth,
-      currentDate,
-      currentHours,
-      currentMins,
-    ]);
+    //setDate([
+    //  currentYear,
+    //  currentMonth,
+    //  currentDate,
+    //  currentHours,
+    //  currentMins,
+    //]);
     setCalendarArray(
       fillRows(
-        new Date(currentYear, currentMonth, 1),
-        currentDate,
+        currentFirstDayInMonth,
         countDaysInMonth,
         countDaysInPreviousMonth
       )

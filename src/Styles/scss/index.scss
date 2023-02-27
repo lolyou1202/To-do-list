@@ -35,12 +35,115 @@ html {
     font-size: 14px;
     color: #c2c2c2;
   }
-  .calendar-ico {
+}
+.calendar {
+  &-modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 20;
+    height: 425px;
+    width: 100%;
+    background: #2471ff;
+    border-radius: 0 0 30px 30px;
+    transform: translateY(-100%);
+    transition: transform 0.5s ease-in-out;
+    &.active {
+      transform: translateY(0%);
+    }
+  }
+  &-ico {
     svg {
       cursor: pointer;
       width: 24px;
       height: 24px;
       stroke: #b5c1db;
+    }
+  }
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 30px;
+    padding: 20px 0;
+    font-weight: 700;
+    font-size: 20px;
+    color: #fff;
+    line-height: 100%;
+    border-bottom: 1px solid rgba($color: #fff, $alpha: 0.4);
+    &-navigation {
+      display: flex;
+      gap: 10px;
+    }
+    &-button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 34px;
+      height: 34px;
+      background: transparent;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      div {
+        width: 26px;
+        height: 26px;
+      }
+      svg {
+        width: 26px;
+        height: 26px;
+        fill: #fff;
+      }
+      &:hover {
+        background: rgba($color: #fff, $alpha: 0.3);
+      }
+    }
+  }
+  &__main {
+    margin: 0 30px;
+    padding: 20px 0 40px 0;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 100%;
+    color: #fff;
+    &-week {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      text-align: center;
+    }
+    &-grid {
+      padding-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      grid-row-gap: 10px;
+      justify-items: center;
+      div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        &.notCurrentMonth {
+          color: rgba($color: #fff, $alpha: 0.4);
+        }
+        &.today {
+          background: rgba($color: #fff, $alpha: 0.3);
+        }
+        &.active {
+          background: #fff;
+          color: #2471ff;
+          &:hover {
+            background: #fff;
+          }
+        }
+        &:hover {
+          background: rgba($color: #fff, $alpha: 0.3);
+        }
+      }
     }
   }
 }
@@ -96,7 +199,6 @@ html {
   .stages {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     padding: 0 30px 14px 30px;
     gap: 10px;
     list-style: none;
@@ -252,9 +354,11 @@ html {
   opacity: 0;
   background: rgba($color: #000000, $alpha: 0);
   transition: all 0.5s ease-in-out 0.1s;
-  &:has(.newTask-modal.active) {
+  &:has(.newTask-modal.active),
+  &:has(.calendar-modal.active) {
     z-index: 10;
     opacity: 1;
+    background: rgba($color: #000000, $alpha: 0.4);
     transition: all 0.5s ease-in-out;
   }
 }
@@ -264,18 +368,22 @@ html {
     bottom: 0;
     left: 0;
     height: 100%;
+    max-height: calc(100vh - 100px);
     width: 100%;
-    max-height: 0px;
     background: #2471ff;
     border-radius: 30px 30px 0 0;
-    overflow: hidden;
-    transition: max-height 0.5s ease-in-out;
-    overflow-y: auto;
+    transform: translateY(100%);
+    transition: transform 0.5s ease-in-out;
     &.active {
-      max-height: calc(100vh - 100px);
+      transform: translateY(0%);
     }
-    &::-webkit-scrollbar {
-      display: none;
+    & > div {
+      margin-top: 40px;
+      overflow-y: auto;
+      max-height: calc(100vh - 140px);
+      &::-webkit-scrollbar {
+        display: none;
+      }
     }
   }
   &__block:not(:last-child) {
@@ -293,7 +401,7 @@ html {
     }
   }
   &__mainInfo {
-    padding: 40px 30px 30px 30px;
+    padding: 0 30px 30px 30px;
     &-block {
       display: flex;
       position: relative;
@@ -582,7 +690,8 @@ html {
       border-radius: 8px;
       cursor: pointer;
       outline: none;
-      transition: all .2s ease-in-out;
+      flex-shrink: 0;
+      transition: all 0.2s ease-in-out;
       &.active {
         outline: 2px solid #fff;
         .close-ico {
@@ -631,12 +740,29 @@ html {
         }
       }
       .newPersone__modal {
+        display: flex;
+        //overflow-x: auto;
+        gap: 10px;
         position: absolute;
         bottom: 100%;
         left: 0;
         background: #91b7fe;
         border-radius: 10px;
         padding: 10px;
+        font-weight: 400;
+        font-size: 14px;
+        color: #fff;
+        line-height: 100%;
+        opacity: 0;
+        z-index: -1;
+        transition: opacity 0.3s ease-in-out, z-index 0.3s ease-in-out;
+        &.active {
+          opacity: 1;
+          z-index: 10;
+        }
+        &.empty {
+          width: 115px;
+        }
       }
     }
     & > p {
@@ -646,7 +772,6 @@ html {
       color: #fff;
       margin-bottom: 20px;
     }
-    
   }
   &__buttons {
     height: 40px;
@@ -679,4 +804,7 @@ html {
   height: 4px;
   border-radius: 5px;
   cursor: pointer;
+  &.calendar {
+    top: calc(100% - 15px);
+  }
 }

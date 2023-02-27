@@ -41,11 +41,137 @@ html {
   font-size: 14px;
   color: #c2c2c2;
 }
-.header .calendar-ico svg {
+
+.calendar-modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  height: 425px;
+  width: 100%;
+  background: #2471ff;
+  border-radius: 0 0 30px 30px;
+  -webkit-transform: translateY(-100%);
+          transform: translateY(-100%);
+  -webkit-transition: -webkit-transform 0.5s ease-in-out;
+  transition: -webkit-transform 0.5s ease-in-out;
+  transition: transform 0.5s ease-in-out;
+  transition: transform 0.5s ease-in-out, -webkit-transform 0.5s ease-in-out;
+}
+.calendar-modal.active {
+  -webkit-transform: translateY(0%);
+          transform: translateY(0%);
+}
+.calendar-ico svg {
   cursor: pointer;
   width: 24px;
   height: 24px;
   stroke: #b5c1db;
+}
+.calendar__header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 0 30px;
+  padding: 20px 0;
+  font-weight: 700;
+  font-size: 20px;
+  color: #fff;
+  line-height: 100%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+}
+.calendar__header-navigation {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 10px;
+}
+.calendar__header-button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 34px;
+  height: 34px;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.calendar__header-button div {
+  width: 26px;
+  height: 26px;
+}
+.calendar__header-button svg {
+  width: 26px;
+  height: 26px;
+  fill: #fff;
+}
+.calendar__header-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+.calendar__main {
+  margin: 0 30px;
+  padding: 20px 0 40px 0;
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 100%;
+  color: #fff;
+}
+.calendar__main-week {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[7];
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+}
+.calendar__main-grid {
+  padding-top: 20px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[7];
+  grid-template-columns: repeat(7, 1fr);
+  grid-row-gap: 10px;
+  justify-items: center;
+}
+.calendar__main-grid div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+.calendar__main-grid div.notCurrentMonth {
+  color: rgba(255, 255, 255, 0.4);
+}
+.calendar__main-grid div.active {
+  background: #fff;
+  color: #2471ff;
+}
+.calendar__main-grid div:hover {
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .main .search {
@@ -142,9 +268,6 @@ html {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
   padding: 0 30px 14px 30px;
   gap: 10px;
   list-style: none;
@@ -334,9 +457,10 @@ html {
   -webkit-transition: all 0.5s ease-in-out 0.1s;
   transition: all 0.5s ease-in-out 0.1s;
 }
-.wrapper-modal:has(.newTask-modal.active) {
+.wrapper-modal:has(.newTask-modal.active), .wrapper-modal:has(.calendar-modal.active) {
   z-index: 10;
   opacity: 1;
+  background: rgba(0, 0, 0, 0.4);
   -webkit-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out;
 }
@@ -346,19 +470,27 @@ html {
   bottom: 0;
   left: 0;
   height: 100%;
+  max-height: calc(100vh - 100px);
   width: 100%;
-  max-height: 0px;
   background: #2471ff;
   border-radius: 30px 30px 0 0;
-  overflow: hidden;
-  -webkit-transition: max-height 0.5s ease-in-out;
-  transition: max-height 0.5s ease-in-out;
-  overflow-y: auto;
+  -webkit-transform: translateY(100%);
+          transform: translateY(100%);
+  -webkit-transition: -webkit-transform 0.5s ease-in-out;
+  transition: -webkit-transform 0.5s ease-in-out;
+  transition: transform 0.5s ease-in-out;
+  transition: transform 0.5s ease-in-out, -webkit-transform 0.5s ease-in-out;
 }
 .newTask-modal.active {
-  max-height: calc(100vh - 100px);
+  -webkit-transform: translateY(0%);
+          transform: translateY(0%);
 }
-.newTask-modal::-webkit-scrollbar {
+.newTask-modal > div {
+  margin-top: 40px;
+  overflow-y: auto;
+  max-height: calc(100vh - 140px);
+}
+.newTask-modal > div::-webkit-scrollbar {
   display: none;
 }
 .newTask__block:not(:last-child) {
@@ -377,7 +509,7 @@ html {
   opacity: 0.3;
 }
 .newTask__mainInfo {
-  padding: 40px 30px 30px 30px;
+  padding: 0 30px 30px 30px;
 }
 .newTask__mainInfo-block {
   display: -webkit-box;
@@ -782,6 +914,8 @@ html {
   border-radius: 8px;
   cursor: pointer;
   outline: none;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
 }
@@ -836,12 +970,31 @@ html {
   stroke: #fff;
 }
 .newTask__invite-newPersone .newPersone__modal {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 10px;
   position: absolute;
   bottom: 100%;
   left: 0;
   background: #91b7fe;
   border-radius: 10px;
   padding: 10px;
+  font-weight: 400;
+  font-size: 14px;
+  color: #fff;
+  line-height: 100%;
+  opacity: 0;
+  z-index: -1;
+  -webkit-transition: opacity 0.3s ease-in-out, z-index 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out, z-index 0.3s ease-in-out;
+}
+.newTask__invite-newPersone .newPersone__modal.active {
+  opacity: 1;
+  z-index: 10;
+}
+.newTask__invite-newPersone .newPersone__modal.empty {
+  width: 115px;
 }
 .newTask__invite > p {
   font-weight: 400;
@@ -886,4 +1039,7 @@ html {
   height: 4px;
   border-radius: 5px;
   cursor: pointer;
+}
+.navButton.calendar {
+  top: calc(100% - 15px);
 }

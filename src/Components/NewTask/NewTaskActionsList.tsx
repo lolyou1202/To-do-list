@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ReactSVG } from "react-svg";
-import { actionsContetnt } from "../types/types";
+import { actionsContetnt } from "../../types/types";
 import { NewTaskAction } from "./NewTaskAction";
 
 interface NewTaskActionsListProps {
@@ -67,7 +67,7 @@ export const NewTaskActionsList: React.FC<NewTaskActionsListProps> = ({
       const newItem: actionsContetnt = {
         text: event.currentTarget.value,
         background: bacgroundActions[rand],
-        picked: false
+        picked: false,
       };
       bacgroundActions.splice(rand, 1);
       setState([...state, newItem]);
@@ -102,7 +102,7 @@ export const NewTaskActionsList: React.FC<NewTaskActionsListProps> = ({
       >
         <ReactSVG
           className="add-actions"
-          src={require("../Image/plus-ico.svg").default}
+          src={require("../../Image/plus-ico.svg").default}
         />
         <div
           className={`newAction__modal ${position}`}

@@ -1,5 +1,5 @@
 import { ReactSVG } from "react-svg";
-import { actionsContetnt } from "../types/types";
+import { actionsContetnt } from "../../types/types";
 
 interface NewTaskActionProps {
   state: actionsContetnt[];
@@ -46,7 +46,7 @@ export const NewTaskAction: React.FC<NewTaskActionProps> = ({
       <p>{item.text}</p>
       <ReactSVG
         className="close-ico"
-        src={require("../Image/close-ico.svg").default}
+        src={require("../../Image/close-ico.svg").default}
         onClick={closeActionClickHandler}
       />
     </li>

@@ -15,27 +15,28 @@ export const Calendar: FC<CalendarProps> = ({
   setCalendarModalState,
 }) => {
   const [calendarArray, setCalendarArray] = useState<arrayCalendar[]>([]);
-  console.log(calendarArray)
-  const date = new Date();
-  const currentYear = date.getFullYear();
-  const currentMonth = date.getMonth();
-  const currentDate = date.getDate();
-  const currentHours = date.getHours();
-  const currentMins = date.getMinutes();
-  const countDaysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-  const countDaysInPreviousMonth = new Date(
+  console.log(calendarArray);
+  let date = new Date();
+  let currentYear = date.getFullYear();
+  let currentMonth = date.getMonth();
+  let currentDate = date.getDate();
+  let currentHours = date.getHours();
+  let currentMins = date.getMinutes();
+  let countDaysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+  let countDaysInPreviousMonth = new Date(
     currentYear,
     currentMonth,
     0
   ).getDate();
 
   const fillRows = (
-    currentYear: number,
-    currentMonth: number,
+    date: Date,
+    currentDate: number,
     countDaysInMonth: number,
     countDaysInPreviousMonth: number
   ) => {
-    let firstDayInMonth = new Date(currentYear, currentMonth, 1).getDay() + 6;
+    let firstDayInMonth = date.getDate() + 6;
+    console.log(firstDayInMonth)
     if (firstDayInMonth > 6) {
       firstDayInMonth = firstDayInMonth - 7;
     }
@@ -92,6 +93,44 @@ export const Calendar: FC<CalendarProps> = ({
     return fillRows;
   };
 
+  const handlerPrevArrowClick = () => {
+    currentMonth = currentMonth - 1;
+    date = new Date(currentYear, currentMonth, 1);
+    //console.log(first)
+    let countDaysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+    let countDaysInPreviousMonth = new Date(
+      currentYear,
+      currentMonth,
+      0
+    ).getDate();
+    setCalendarArray(
+      fillRows(
+        date,
+        currentDate,
+        countDaysInMonth,
+        countDaysInPreviousMonth
+      )
+    );
+  };
+  const handlerNextArrowClick = () => {
+    currentMonth = currentMonth + 1;
+    date = new Date(currentYear, currentMonth, 1);
+    let countDaysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+    let countDaysInPreviousMonth = new Date(
+      currentYear,
+      currentMonth,
+      0
+    ).getDate();
+    setCalendarArray(
+      fillRows(
+        date,
+        currentDate,
+        countDaysInMonth,
+        countDaysInPreviousMonth
+      )
+    );
+  };
+
   useEffect(() => {
     setDate([
       currentYear,
@@ -102,8 +141,8 @@ export const Calendar: FC<CalendarProps> = ({
     ]);
     setCalendarArray(
       fillRows(
-        currentYear,
-        currentMonth,
+        new Date(currentYear, currentMonth, 1),
+        currentDate,
         countDaysInMonth,
         countDaysInPreviousMonth
       )
@@ -116,12 +155,18 @@ export const Calendar: FC<CalendarProps> = ({
       <div className="calendar__header">
         <p className="calendar__header-year">January 2023</p>
         <div className="calendar__header-navigation">
-          <button className="calendar__header-button previous">
+          <button
+            className="calendar__header-button previous"
+            onClick={handlerPrevArrowClick}
+          >
             <ReactSVG
               src={require("../../Image/arrow-left-icon.svg").default}
             />
           </button>
-          <button className="calendar__header-button next">
+          <button
+            className="calendar__header-button next"
+            onClick={handlerNextArrowClick}
+          >
             <ReactSVG
               src={require("../../Image/arrow-right-icon.svg").default}
             />
@@ -140,7 +185,11 @@ export const Calendar: FC<CalendarProps> = ({
         </div>
         <div className="calendar__main-grid">
           {calendarArray.map((item, index) => (
-            <CalendarItem key={index} item={item} calendarArray={calendarArray} setCalendarArray={setCalendarArray} />
+            <CalendarItem
+              key={index}
+              item={item}
+              setCalendarArray={setCalendarArray}
+            />
           ))}
         </div>
       </div>

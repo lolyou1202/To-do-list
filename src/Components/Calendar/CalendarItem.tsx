@@ -28,7 +28,7 @@ export const CalendarItem: FC<CalendarItemProps> = ({
       className={`${item.classes}` + (item.active ? " active" : "")}
       onClick={handlerClick}
     >
-      {item.value}
+      {item.date.getDate()}
     </div>
   );
 };

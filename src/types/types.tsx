@@ -25,7 +25,7 @@ export type noteList = {
 
 export type arrayCalendar = {
     id: number
-    value: number
+    date: Date
     classes: string
     active: boolean
 };

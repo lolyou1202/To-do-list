@@ -52,6 +52,7 @@ export const NewTask: FC<NewTaskProps> = ({
             picked: false,
         }
     ]);
+    console.log(availableActions)
     const [availablePersons, setAvailablePersons] = useState([
         {
             id: 1,

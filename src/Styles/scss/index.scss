@@ -491,8 +491,7 @@ html {
                 }
             }
         }
-        &-newAction {
-            position: relative;
+        &-addAction {
             .add-actions {
                 display: flex;
                 width: 35px;
@@ -506,12 +505,6 @@ html {
                     stroke: #fff;
                 }
             }
-            &.active {
-                .newAction__modal {
-                    opacity: 1;
-                    z-index: 1;
-                }
-            }
         }
         .newAction__modal {
             position: absolute;
@@ -520,12 +513,18 @@ html {
             background: #91b7fe;
             padding: 5px 10px 5px 10px;
             border-radius: 10px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
             opacity: 0;
             z-index: -1;
-            transition: opacity 0.3s ease-in-out;
+            -webkit-box-shadow: 0px 0px 25px 20px rgba(7, 8, 9, 0.2);
+            -moz-box-shadow: 0px 0px 25px 20px rgba(7, 8, 9, 0.2);
+            box-shadow: 0px 0px 25px 20px rgba(7, 8, 9, 0.2);
+            transition: z-index 0.3s ease-in-out, opacity 0.3s ease-in-out;
             input {
-                width: 130px;
-                height: 20px;
+                width: calc(100vw - 120px);
+                height: 25px;
                 border: none;
                 background: transparent;
                 outline: none;
@@ -540,53 +539,9 @@ html {
                     color: rgba(#fff, 0.4);
                 }
             }
-            &.left {
-                left: -12px;
-                top: 50%;
-                transform: translate(-100%, -50%);
-                &::before {
-                    content: "";
-                    position: absolute;
-                    left: 100%;
-                    top: 50%;
-                    transform: translateY(-50%);
-                    width: 0;
-                    height: 0;
-                    border-style: solid;
-                    border-width: 5px 0 5px 6px;
-                    border-color: transparent transparent transparent #91b7fe;
-                }
-            }
-            &.top {
-                left: -58px;
-                bottom: calc(100% + 10px);
-                &::before {
-                    content: "";
-                    position: absolute;
-                    left: 50%;
-                    top: 100%;
-                    transform: translateX(-50%);
-                    border-style: solid;
-                    border-width: 6px 8px 0 8px;
-                    border-color: #91b7fe transparent transparent transparent;
-                }
-            }
-            &.right {
-                left: calc(100% + 12px);
-                top: 50%;
-                transform: translateY(-50%);
-                &::before {
-                    content: "";
-                    position: absolute;
-                    right: 100%;
-                    top: 50%;
-                    transform: translateY(-50%);
-                    width: 0;
-                    height: 0;
-                    border-style: solid;
-                    border-width: 5px 6px 5px 0;
-                    border-color: transparent #91b7fe transparent transparent;
-                }
+            &.active {
+                opacity: 1;
+                z-index: 1;
             }
         }
     }

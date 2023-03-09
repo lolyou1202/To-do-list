@@ -1,61 +1,51 @@
 import { useContext } from "react";
 import { ReactSVG } from "react-svg";
-import { actionsContetnt } from "../../../../types/types";
-import { ContextPropertyToDo, PropertyToDoContext } from "../../../Context";
+import { AvailableActions } from "../../../../types/types";
+import { AvailableActionsContext, ContextAvailableActions } from "../../../Context";
 
 interface ActionProps {
-    item: actionsContetnt;
+    item: AvailableActions;
 }
 
 export const Action: React.FC<ActionProps> = ({ item }) => {
-    const { propertyToDo, setProppertyToDo } = useContext(
-        PropertyToDoContext
-    ) as ContextPropertyToDo;
+    const { availableActions, setAvailableActions } = useContext(AvailableActionsContext) as ContextAvailableActions;
 
-    //const actionClickHandler = () => {
-    //    const addPickedAction = [...propertyToDo.actions].map((i) => {
-    //        if (i === item) {
-    //            i.picked = !i.picked;
-    //        } else {
-    //            i.picked = false;
-    //        }
-    //        return i;
-    //    });
-    //    setProppertyToDo((prev) => ({
-    //        ...prev,
-    //        actions: addPickedAction,
-    //    }));
-    //};
+    const actionClickHandler = () => {
+        const addPickedAction = [...availableActions].map((i) => {
+            if (i.id === item.id) {
+                i.picked = !i.picked;
+            } else {
+                i.picked = false;
+            }
+            return i;
+        });
+        setAvailableActions(addPickedAction);
+    };
 
-    //const closeActionClickHandler = (e: React.MouseEvent) => {
-    //    e.stopPropagation();
+    const closeActionClickHandler = (e: React.MouseEvent) => {
+        e.stopPropagation();
 
-    //    const newActionList = [...propertyToDo.actions].filter((i) => {
-    //        if (i === item) {
-    //            return false;
-    //        } else {
-    //            return true;
-    //        }
-    //    });
-    //    setProppertyToDo((prev) => ({
-    //        ...prev,
-    //        actions: newActionList,
-    //    }));
-    //};
+        const newActionList = [...availableActions].filter((i) => {
+            if (i.id === item.id) {
+                return false;
+            } else {
+                return true;
+            }
+        });
+        setAvailableActions(newActionList);
+    };
 
     return (
         <li
-            className={
-                "newTask__mainInfo-action" + (item.picked ? " active" : "")
-            }
+            className={"newTask__mainInfo-action" + (item.picked ? " active" : "")}
             style={{ background: `${item.background}` }}
-            //onClick={actionClickHandler}
+            onClick={actionClickHandler}
         >
             <p>{item.text}</p>
             <ReactSVG
                 className="close-ico"
                 src={require("../../../../Image/close-ico.svg").default}
-                //onClick={closeActionClickHandler}
+                onClick={closeActionClickHandler}
             />
         </li>
     );

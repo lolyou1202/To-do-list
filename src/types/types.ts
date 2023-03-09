@@ -1,11 +1,5 @@
 import { priorityEnum } from "./enums";
 
-export type actionsContetnt = {
-    text: string;
-    background: string;
-    picked: boolean;
-};
-
 export type person = {
     id: number;
     name: string;

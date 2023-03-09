@@ -313,38 +313,6 @@ html {
         }
     }
 }
-.newTask {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    bottom: 0;
-    height: 60px;
-    width: 100%;
-    border: none;
-    border-radius: 30px 30px 0 0;
-    background: #2471ff;
-    cursor: pointer;
-    .plus-ico {
-        display: flex;
-        background: #fff;
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        svg {
-            width: 30px;
-            height: 30px;
-            stroke: #2471ff;
-        }
-    }
-    p {
-        font-weight: 400;
-        font-size: 18px;
-        color: #fff;
-        line-height: 100%;
-        margin-left: 10px;
-    }
-}
 .wrapper-modal {
     position: absolute;
     left: 0;
@@ -364,6 +332,17 @@ html {
     }
 }
 .newTask {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    height: 60px;
+    width: 100%;
+    border: none;
+    border-radius: 30px 30px 0 0;
+    background: #2471ff;
+    cursor: pointer;
     &-modal {
         position: absolute;
         bottom: 0;
@@ -774,6 +753,126 @@ html {
             margin-bottom: 20px;
         }
     }
+    &__time {
+        position: relative;
+        padding: 30px;
+        &-list {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+            list-style: none;
+        }
+        .selectTime__item {
+            position: relative;
+            &-button {
+                height: 35px;
+                padding: 0 15px;
+                background: #91b7fe;
+                border: none;
+                border-radius: 8px;
+                font-weight: 400;
+                font-size: 16px;
+                line-height: 100%;
+                color: #fff;
+                cursor: pointer;
+            }
+            &-modal {
+                display: none;
+                text-align: center;
+                position: absolute;
+                left: 0;
+                top: calc(100% + 4px);
+                z-index: 10;
+                overflow: auto;
+                width: 100%;
+                max-height: 119px;
+                background: #91b7fe;
+                border-radius: 8px;
+                &.active {
+                    display: block;
+                }
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+                p {
+                    position: relative;
+                    font-weight: 400;
+                    font-size: 14px;
+                    line-height: 100%;
+                    color: #fff;
+                    padding: 8px 10px;
+                    transition: background .3s ease-in-out;
+                    &:not(:last-child) {
+                        &::before {
+                            content: '';
+                            position: absolute;
+                            bottom: 0;
+                            left: 50%;
+                            transform: translateX(-50%);
+                            width: calc(100% - 10px);
+                            height: 1px;
+                            background: rgba($color: #fff, $alpha: .3);
+                            border-radius: 10px;
+                        }
+                    }
+                    &:hover {
+                        background: #83adfc;
+                    }
+                }
+            }
+            &.month {
+                button {
+                    width: 110px;
+                }
+            }
+            &-hourBlock {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 35px;
+                background: #91b7fe;
+                border: none;
+                border-radius: 8px;
+                font-weight: 400;
+                font-size: 16px;
+                line-height: 100%;
+                color: #fff;
+                .colon {
+                    position: relative;
+                    bottom: 2px;
+                    margin: 0 2px;
+                }
+            }
+            &-hour, &-minutes {
+                button {
+                    border: none;
+                    background: none;
+                    font-weight: 400;
+                    font-size: 16px;
+                    line-height: 100%;
+                    color: #fff;
+                    cursor: pointer;
+                }
+            }
+            .small {
+                width: 50px;
+            }
+            .medium {
+                width: 75px;
+            }
+            .large {
+                width: 110px;
+            }
+        }
+        & > p {
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 100%;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+    }
     &__buttons {
         height: 40px;
         padding: 0 15px;
@@ -793,6 +892,25 @@ html {
             padding: 30px;
             gap: 15px;
         }
+    }
+    .plus-ico {
+        display: flex;
+        background: #fff;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        svg {
+            width: 30px;
+            height: 30px;
+            stroke: #2471ff;
+        }
+    }
+    p {
+        font-weight: 400;
+        font-size: 18px;
+        color: #fff;
+        line-height: 100%;
+        margin-left: 10px;
     }
 }
 .navButton {

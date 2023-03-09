@@ -21,9 +21,7 @@ export const Calendar: FC<CalendarProps> = ({
     const [currentFirstDayInMonth, setCurrentFirstDayInMonth] = useState<Date>(
         new Date(date.getFullYear(), date.getMonth(), 1)
     );
-    //console.log(calendarArray);
-    //console.log(currentFirstDayInMonth);
-
+    
     const fillRows = (
         date: Date,
         countDaysInMonth: number,

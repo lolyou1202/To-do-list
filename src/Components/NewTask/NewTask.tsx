@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import { AvailableActions, toDoProperty } from "../../types/types";
-import { AvailableActionsContext, PropertyToDoContext } from "../Context";
+import { AvailableActionsContext, AvailablePersonsContext, PropertyToDoContext } from "../Context";
 import { MainInfo } from "./mainInfo/MainInfo";
 import { Buttons } from "./buttons/Buttons";
 import { Time } from "./time/Time";
@@ -26,33 +26,35 @@ export const NewTask: FC<NewTaskProps> = ({
         time: new Date(),
     });
 
-    const [availableActions, setAvailableActions] = useState<AvailableActions[]>([
+    const [availableActions, setAvailableActions] = useState<
+        AvailableActions[]
+    >([
         {
             id: 1,
             text: "Meeteng",
-            background: "",
+            background: "#6C5B7C",
             picked: false,
         },
         {
             id: 2,
             text: "Design project",
-            background: "",
+            background: "#3FBAC2",
             picked: false,
         },
         {
             id: 3,
             text: "Marketing",
-            background: "",
+            background: "#E84A5F",
             picked: false,
         },
         {
             id: 4,
             text: "Review",
-            background: "",
+            background: "#B693FE",
             picked: false,
-        }
+        },
     ]);
-    console.log(availableActions)
+    //console.log(availableActions)
     const [availablePersons, setAvailablePersons] = useState([
         {
             id: 1,
@@ -95,27 +97,32 @@ export const NewTask: FC<NewTaskProps> = ({
         <AvailableActionsContext.Provider
             value={{ availableActions, setAvailableActions }}
         >
-            <PropertyToDoContext.Provider
-                value={{ propertyToDo, setProppertyToDo }}
+            <AvailablePersonsContext.Provider
+                value={{ availablePersons, setAvailablePersons }}
             >
-                <div
-                    className={
-                        "newTask-modal" + (newTaskModalState ? " active" : "")
-                    }
+                <PropertyToDoContext.Provider
+                    value={{ propertyToDo, setProppertyToDo }}
                 >
-                    <div>
-                        <MainInfo />
-                        <Priority />
-                        <Time />
-                        <Persone />
-                        <Buttons />
-                        <div
-                            className="navButton"
-                            onClick={() => setNewTaskModalState(false)}
-                        ></div>
+                    <div
+                        className={
+                            "newTask-modal" +
+                            (newTaskModalState ? " active" : "")
+                        }
+                    >
+                        <div>
+                            <MainInfo />
+                            <Priority />
+                            <Time />
+                            <Persone />
+                            <Buttons />
+                            <div
+                                className="navButton"
+                                onClick={() => setNewTaskModalState(false)}
+                            ></div>
+                        </div>
                     </div>
-                </div>
-            </PropertyToDoContext.Provider>
+                </PropertyToDoContext.Provider>
+            </AvailablePersonsContext.Provider>
         </AvailableActionsContext.Provider>
     );
 };

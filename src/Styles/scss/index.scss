@@ -660,7 +660,6 @@ html {
             }
         }
         &-newPersone {
-            position: relative;
             .add-person {
                 display: flex;
                 width: 35px;
@@ -676,11 +675,14 @@ html {
             }
             .newPersone__modal {
                 display: flex;
-                //overflow-x: auto;
+                align-items: center;
                 gap: 10px;
+                width: calc(100vw - 120px);
+                height: 35px;
                 position: absolute;
-                bottom: 100%;
-                left: 0;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
                 background: #91b7fe;
                 border-radius: 10px;
                 padding: 10px;
@@ -690,13 +692,13 @@ html {
                 line-height: 100%;
                 opacity: 0;
                 z-index: -1;
+                -webkit-box-shadow: 0px 0px 25px 20px rgba(7, 8, 9, 0.2);
+                -moz-box-shadow: 0px 0px 25px 20px rgba(7, 8, 9, 0.2);
+                box-shadow: 0px 0px 25px 20px rgba(7, 8, 9, 0.2);
                 transition: opacity 0.3s ease-in-out, z-index 0.3s ease-in-out;
                 &.active {
                     opacity: 1;
                     z-index: 10;
-                }
-                &.empty {
-                    width: 115px;
                 }
             }
         }

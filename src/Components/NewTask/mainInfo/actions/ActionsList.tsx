@@ -1,45 +1,64 @@
-import React, { FC, useCallback, useContext, useEffect, useRef, useState } from "react";
+import React, {
+    FC,
+    useCallback,
+    useContext,
+    useEffect,
+    useRef,
+    useState,
+} from "react";
 import { ReactSVG } from "react-svg";
 import { AvailableActions } from "../../../../types/types";
-import { AvailableActionsContext, ContextAvailableActions, ContextPropertyToDo, PropertyToDoContext } from "../../../Context";
+import {
+    AvailableActionsContext,
+    ContextAvailableActions,
+} from "../../../Context";
 import { ActionsBackgrounds } from "../settings/settings";
 import { Action } from "./Action";
 
 export const ActionsList: FC = () => {
-    const { availableActions, setAvailableActions } = useContext(
-        AvailableActionsContext
-    ) as ContextAvailableActions;
+    const { availableActions, setAvailableActions } = useContext(AvailableActionsContext) as ContextAvailableActions;
 
     const [bacgroundActions, setBacgroundActions] = useState<string[]>(ActionsBackgrounds);
     const [newActionInput, setNewActionInput] = useState("");
     const [newActionModalState, setNewActionModalState] = useState(false);
+
     const newActionModal = useRef<HTMLDivElement>(null);
 
-    const randomActions = () => {
-        return availableActions.map((item) => {
-            let rand = Math.floor(Math.random() * bacgroundActions.length);
-            item.background = bacgroundActions[rand];
-            bacgroundActions.splice(rand, 1);
+    const randomBackground = () => {
+        const updateBacgroundActions = [...bacgroundActions];
+        const newAvailableActions = availableActions.map((item) => {
+            let rand = Math.floor(
+                Math.random() * updateBacgroundActions.length
+            );
+            item.background = updateBacgroundActions[rand];
+            updateBacgroundActions.splice(rand, 1);
             return item;
         });
-    }
+        setBacgroundActions(updateBacgroundActions);
+        return newAvailableActions;
+    };
+
+    const updateBacgroundActions = useCallback(
+        () =>
+            bacgroundActions.length === 0 &&
+            setBacgroundActions(ActionsBackgrounds),
+        [bacgroundActions]
+    );
 
     const newActionEnterHandler = (
         event: React.KeyboardEvent<HTMLInputElement>
     ) => {
+        const updateBacgroundActions = [...bacgroundActions];
         if (event.key === "Enter" && event.currentTarget.value !== "") {
-            let rand = Math.floor(Math.random() * bacgroundActions.length);
+            let rand = Math.floor(Math.random() * updateBacgroundActions.length);
             const newItem: AvailableActions = {
                 id: availableActions.length + 1,
                 text: event.currentTarget.value,
-                background: bacgroundActions[rand],
+                background: updateBacgroundActions[rand],
                 picked: false,
             };
-            bacgroundActions.splice(rand, 1);
-            setAvailableActions((prev) => ([
-                ...prev,
-                newItem,
-            ]));
+            setBacgroundActions(updateBacgroundActions.filter((_, i) => i !== rand));
+            setAvailableActions((prev) => [...prev, newItem]);
             setNewActionInput("");
             setNewActionModalState(false);
         }
@@ -47,36 +66,43 @@ export const ActionsList: FC = () => {
 
     useEffect(() => {
         const handleClickOutside = (event: Event) => {
-            if (newActionModalState && newActionModal.current && !newActionModal.current.contains(event.target as HTMLElement)) {
-                setNewActionModalState(prev => !prev)
+            if (
+                newActionModalState &&
+                newActionModal.current &&
+                !newActionModal.current.contains(event.target as HTMLElement)
+            ) {
+                setNewActionModalState((prev) => !prev);
             }
-        }
+        };
         document.addEventListener("mousedown", handleClickOutside);
         return () => {
-          document.removeEventListener("mousedown", handleClickOutside);
+            document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [newActionModalState]);
 
     useEffect(() => {
-        setAvailableActions(randomActions)
+        setAvailableActions(randomBackground);
         // eslint-disable-next-line
     }, []);
+    useEffect(() => {
+        updateBacgroundActions();
+    }, [updateBacgroundActions]);
 
     return (
         <ul className="newTask__mainInfo-actions">
-            {availableActions.map((item) => {
-                return <Action item={item} key={item.id} />;
-            })}
+            {availableActions.map((item) => (
+                <Action item={item} key={item.id} />
+            ))}
             <li
                 className={"newTask__mainInfo-addAction"}
-                onClick={() => setNewActionModalState(prev => !prev)}
+                onClick={() => setNewActionModalState((prev) => !prev)}
             >
                 <ReactSVG
                     className="add-actions"
                     src={require("../../../../Image/plus-ico.svg").default}
                 />
                 <div
-                    className={'newAction__modal' + (newActionModalState ? ' active' : '')}
+                    className={"newAction__modal" + (newActionModalState ? " active" : "")}
                     onClick={(e) => e.stopPropagation()}
                     ref={newActionModal}
                 >

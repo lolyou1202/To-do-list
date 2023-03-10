@@ -1,5 +1,5 @@
 import React, { createContext } from "react";
-import { AvailableActions, noteList, toDoProperty } from "../types/types";
+import { AvailableActions, noteList, person, toDoProperty } from "../types/types";
 
 export type ContextNoteList = {
     noteList: noteList[],
@@ -23,8 +23,8 @@ export type ContextAvailableActions = {
 export const AvailableActionsContext = createContext<ContextAvailableActions | null>(null);
 
 
-//export type ContextAvailablePersons = {
-//    propertyToDo: toDoProperty,
-//    setProppertyToDo: React.Dispatch<React.SetStateAction<toDoProperty>>
-//};
-//export const AvailablePersonsContext = createContext<ContextPropertyToDo | null>(null);
+export type ContextAvailablePersons = {
+    availablePersons: person[],
+    setAvailablePersons: React.Dispatch<React.SetStateAction<person[]>>
+};
+export const AvailablePersonsContext = createContext<ContextAvailablePersons | null>(null);

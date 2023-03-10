@@ -4,7 +4,10 @@ import {
     selectedDateObj,
     selectsTimeState,
 } from "../../../types/types";
-import { ContextPropertyToDo, PropertyToDoContext } from "../../Context";
+import {
+    ContextPropertyToDo,
+    PropertyToDoContext,
+} from "../../../Context/Context";
 
 export const Time: FC = () => {
     const { setProppertyToDo } = useContext(

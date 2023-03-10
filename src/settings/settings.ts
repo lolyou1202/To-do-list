@@ -1,4 +1,4 @@
-import { AvailableActions, person } from "../../../../types/types"
+import { AvailableActions, person } from "../types/types"
 
 export let ActionsBackgrounds = [
     "#C3BEF0",

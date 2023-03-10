@@ -1,12 +1,17 @@
 import { useState } from "react";
 import { ReactSVG } from "react-svg";
 import { Calendar } from "./Components/Calendar/Calendar";
-import { NoteListContext } from "./Components/Context";
+import {
+    AvailableActionsContext,
+    AvailablePersonsContext,
+    NoteListContext,
+} from "./Context/Context";
 import { Header } from "./Components/Header";
 import { AddNewTask } from "./Components/NewTask/AddNewTask";
+import { PossibleActions, PossiblePersons } from "./settings/settings";
 import { NewTask } from "./Components/NewTask/NewTask";
 import { ToDoItem } from "./Components/ToDoItem";
-import { noteList } from "./types/types";
+import { AvailableActions, noteList, person } from "./types/types";
 
 export default function App() {
     const [calendarModalState, setCalendarModalState] = useState<boolean>(false);
@@ -34,51 +39,59 @@ export default function App() {
         },
     ]);
     const [date, setDate] = useState<Date>(new Date());
+    const [availableActions, setAvailableActions] = useState<AvailableActions[]>(PossibleActions);
+    const [availablePersons, setAvailablePersons] = useState<person[]>(PossiblePersons);
 
     return (
-        <NoteListContext.Provider value={{noteList, setNoteList}}>
-            <div className="App">
-                <Header date={date} setCalendarModalState={setCalendarModalState} />
-                <main className="main">
-                    <div className="search">
-                        <input
-                            type="text"
-                            className="search-input"
-                            placeholder="Search"
+        <NoteListContext.Provider value={{ noteList, setNoteList }}>
+            <AvailableActionsContext.Provider value={{ availableActions, setAvailableActions }}>
+                <AvailablePersonsContext.Provider value={{ availablePersons, setAvailablePersons }}>
+                    <div className="App">
+                        <Header
+                            date={date}
+                            setCalendarModalState={setCalendarModalState}
                         />
-                        <ReactSVG
-                            className="search-ico"
-                            src={require("./Image/search-ico.svg").default}
-                        />
+                        <main className="main">
+                            <div className="search">
+                                <input
+                                    type="text"
+                                    className="search-input"
+                                    placeholder="Search"
+                                />
+                                <ReactSVG
+                                    className="search-ico"
+                                    src={require("./Image/search-ico.svg").default}
+                                />
+                            </div>
+                            <ul className="stages">
+                                <li className="stages__item stages__undone active">
+                                    <p>Undone</p>
+                                </li>
+                                <li className="stages__item stages__consummation">
+                                    <p>Consummation</p>
+                                </li>
+                            </ul>
+                            <div className="toDo__list">
+                                {noteList.map((item) => (
+                                    <ToDoItem key={item.id} item={item} />
+                                ))}
+                            </div>
+                        </main>
+                        <AddNewTask setModalState={setNewTaskModalState} />
+                        <div className="wrapper-modal">
+                            <Calendar
+                                setDate={setDate}
+                                calendarModalState={calendarModalState}
+                                setCalendarModalState={setCalendarModalState}
+                            />
+                            <NewTask
+                                newTaskModalState={newTaskModalState}
+                                setNewTaskModalState={setNewTaskModalState}
+                            />
+                        </div>
                     </div>
-                    <ul className="stages">
-                        <li className="stages__item stages__undone active">
-                            <p>Undone</p>
-                        </li>
-                        <li className="stages__item stages__consummation">
-                            <p>Consummation</p>
-                        </li>
-                    </ul>
-                    <div className="toDo__list">
-                        {noteList.map((item) => (
-                            <ToDoItem key={item.id} item={item} />
-                        ))}
-                    </div>
-                </main>
-                <AddNewTask setModalState={setNewTaskModalState} />
-                <div className="wrapper-modal">
-                    <Calendar
-                        setDate={setDate}
-                        calendarModalState={calendarModalState}
-                        setCalendarModalState={setCalendarModalState}
-                    />
-                    <NewTask
-                        newTaskModalState={newTaskModalState}
-                        setNewTaskModalState={setNewTaskModalState}
-                    />
-                </div>
-            </div>
+                </AvailablePersonsContext.Provider>
+            </AvailableActionsContext.Provider>
         </NoteListContext.Provider>
-        
     );
 }

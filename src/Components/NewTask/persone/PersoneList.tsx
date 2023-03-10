@@ -1,16 +1,21 @@
 import React, { FC, useContext, useEffect, useRef, useState } from "react";
 import { ReactSVG } from "react-svg";
-import { AvailablePersonsContext, ContextAvailablePersons } from "../../Context";
+import {
+    AvailablePersonsContext,
+    ContextAvailablePersons,
+} from "../../../Context/Context";
 import { SinglePersone } from "./SinglePersone";
 
 export const PersoneList: FC = () => {
-    const { availablePersons, setAvailablePersons } = useContext(AvailablePersonsContext) as ContextAvailablePersons;
+    const { availablePersons, setAvailablePersons } = useContext(
+        AvailablePersonsContext
+    ) as ContextAvailablePersons;
 
     const [PersonModal, setPersonModal] = useState<boolean>(false);
     const peroneModal = useRef<HTMLDivElement>(null);
 
     const invitePersone = () => {
-        setPersonModal(prev => !prev);
+        setPersonModal((prev) => !prev);
         const disabledPick = [...availablePersons].map((i) => {
             i.picked = false;
             return i;
@@ -53,12 +58,15 @@ export const PersoneList: FC = () => {
                     className="add-person"
                     src={require("../../../Image/plus-ico.svg").default}
                 />
-                <div 
-                    className={"newPersone__modal" + (PersonModal ? " active" : "")}
+                <div
+                    className={
+                        "newPersone__modal" + (PersonModal ? " active" : "")
+                    }
                     onClick={(e) => e.stopPropagation()}
                     ref={peroneModal}
                 >
-                    {[...availablePersons].filter((item) => !item.invited).length === 0
+                    {[...availablePersons].filter((item) => !item.invited)
+                        .length === 0
                         ? "No one to invite..."
                         : [...availablePersons]
                               .filter((item) => !item.invited)

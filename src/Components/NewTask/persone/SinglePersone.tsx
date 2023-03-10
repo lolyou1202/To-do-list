@@ -1,7 +1,10 @@
 import { useContext } from "react";
 import { ReactSVG } from "react-svg";
 import { person } from "../../../types/types";
-import { AvailablePersonsContext, ContextAvailablePersons } from "../../Context";
+import {
+    AvailablePersonsContext,
+    ContextAvailablePersons,
+} from "../../../Context/Context";
 
 interface PersoneProps {
     item: person;
@@ -12,10 +15,12 @@ interface PersoneProps {
 export const SinglePersone: React.FC<PersoneProps> = ({
     item,
     type,
-    personModal
+    personModal,
 }) => {
-    const { availablePersons, setAvailablePersons } = useContext(AvailablePersonsContext) as ContextAvailablePersons;
-    
+    const { availablePersons, setAvailablePersons } = useContext(
+        AvailablePersonsContext
+    ) as ContextAvailablePersons;
+
     const personClickHandler = () => {
         if (type === "inList") {
             personModal(false);
@@ -51,7 +56,9 @@ export const SinglePersone: React.FC<PersoneProps> = ({
 
     return (
         <div
-            className={"newTask__invite-persone" + (item.picked ? " active" : "")}
+            className={
+                "newTask__invite-persone" + (item.picked ? " active" : "")
+            }
             style={{
                 backgroundImage: `url(${require(`../../../Image/${item.avatar}`)})`,
             }}

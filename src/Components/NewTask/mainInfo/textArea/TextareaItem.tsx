@@ -1,6 +1,9 @@
 import { useContext } from "react";
 import { placeholderEnum } from "../../../../types/enums";
-import { ContextPropertyToDo, PropertyToDoContext } from "../../../Context";
+import {
+    ContextPropertyToDo,
+    PropertyToDoContext,
+} from "../../../../Context/Context";
 
 interface TextareaItemProps {
     atribute: keyof typeof placeholderEnum;
@@ -11,9 +14,13 @@ export const TextareaItem: React.FC<TextareaItemProps> = ({
     atribute,
     placeholder,
 }) => {
-    const { propertyToDo, setProppertyToDo } = useContext(PropertyToDoContext) as ContextPropertyToDo;
+    const { propertyToDo, setProppertyToDo } = useContext(
+        PropertyToDoContext
+    ) as ContextPropertyToDo;
 
-    const handlerTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const handlerTextareaChange = (
+        e: React.ChangeEvent<HTMLTextAreaElement>
+    ) => {
         setProppertyToDo((prev) => ({
             ...prev,
             [atribute]: e.target.value,

@@ -1,14 +1,19 @@
 import { useContext } from "react";
 import { ReactSVG } from "react-svg";
 import { AvailableActions } from "../../../../types/types";
-import { AvailableActionsContext, ContextAvailableActions } from "../../../Context";
+import {
+    AvailableActionsContext,
+    ContextAvailableActions,
+} from "../../../../Context/Context";
 
 interface ActionProps {
     item: AvailableActions;
 }
 
 export const Action: React.FC<ActionProps> = ({ item }) => {
-    const { availableActions, setAvailableActions } = useContext(AvailableActionsContext) as ContextAvailableActions;
+    const { availableActions, setAvailableActions } = useContext(
+        AvailableActionsContext
+    ) as ContextAvailableActions;
 
     const actionClickHandler = () => {
         const addPickedAction = [...availableActions].map((i) => {
@@ -37,7 +42,9 @@ export const Action: React.FC<ActionProps> = ({ item }) => {
 
     return (
         <li
-            className={"newTask__mainInfo-action" + (item.picked ? " active" : "")}
+            className={
+                "newTask__mainInfo-action" + (item.picked ? " active" : "")
+            }
             style={{ background: `${item.background}` }}
             onClick={actionClickHandler}
         >

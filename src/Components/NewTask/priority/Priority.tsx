@@ -1,6 +1,9 @@
 import { FC, useContext, useRef } from "react";
 import { priorityEnum } from "../../../types/enums";
-import { ContextPropertyToDo, PropertyToDoContext } from "../../Context";
+import {
+    ContextPropertyToDo,
+    PropertyToDoContext,
+} from "../../../Context/Context";
 
 export const Priority: FC = () => {
     const { propertyToDo, setProppertyToDo } = useContext(

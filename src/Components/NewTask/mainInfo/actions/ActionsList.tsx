@@ -11,14 +11,17 @@ import { AvailableActions } from "../../../../types/types";
 import {
     AvailableActionsContext,
     ContextAvailableActions,
-} from "../../../Context";
-import { ActionsBackgrounds } from "../settings/settings";
+} from "../../../../Context/Context";
+import { ActionsBackgrounds } from "../../../../settings/settings";
 import { Action } from "./Action";
 
 export const ActionsList: FC = () => {
-    const { availableActions, setAvailableActions } = useContext(AvailableActionsContext) as ContextAvailableActions;
+    const { availableActions, setAvailableActions } = useContext(
+        AvailableActionsContext
+    ) as ContextAvailableActions;
 
-    const [bacgroundActions, setBacgroundActions] = useState<string[]>(ActionsBackgrounds);
+    const [bacgroundActions, setBacgroundActions] =
+        useState<string[]>(ActionsBackgrounds);
     const [newActionInput, setNewActionInput] = useState("");
     const [newActionModalState, setNewActionModalState] = useState(false);
 
@@ -26,7 +29,7 @@ export const ActionsList: FC = () => {
 
     const randomBackground = () => {
         const updateBacgroundActions = [...bacgroundActions];
-        const newAvailableActions = availableActions.map((item) => {
+        const newAvailableActions = [...availableActions].map((item) => {
             let rand = Math.floor(
                 Math.random() * updateBacgroundActions.length
             );
@@ -35,7 +38,7 @@ export const ActionsList: FC = () => {
             return item;
         });
         setBacgroundActions(updateBacgroundActions);
-        return newAvailableActions;
+        setAvailableActions(newAvailableActions)
     };
 
     const updateBacgroundActions = useCallback(
@@ -50,18 +53,31 @@ export const ActionsList: FC = () => {
     ) => {
         const updateBacgroundActions = [...bacgroundActions];
         if (event.key === "Enter" && event.currentTarget.value !== "") {
-            let rand = Math.floor(Math.random() * updateBacgroundActions.length);
+            let rand = Math.floor(
+                Math.random() * updateBacgroundActions.length
+            );
             const newItem: AvailableActions = {
                 id: availableActions.length + 1,
                 text: event.currentTarget.value,
                 background: updateBacgroundActions[rand],
                 picked: false,
             };
-            setBacgroundActions(updateBacgroundActions.filter((_, i) => i !== rand));
+            setBacgroundActions(
+                updateBacgroundActions.filter((_, i) => i !== rand)
+            );
             setAvailableActions((prev) => [...prev, newItem]);
             setNewActionInput("");
             setNewActionModalState(false);
         }
+    };
+
+    const unfocusActions = () => {
+        setNewActionModalState((prev) => !prev);
+        const disabledPick = [...availableActions].map((i) => {
+            i.picked = false;
+            return i;
+        });
+        setAvailableActions(disabledPick);
     };
 
     useEffect(() => {
@@ -81,7 +97,7 @@ export const ActionsList: FC = () => {
     }, [newActionModalState]);
 
     useEffect(() => {
-        setAvailableActions(randomBackground);
+        randomBackground()
         // eslint-disable-next-line
     }, []);
     useEffect(() => {
@@ -95,14 +111,17 @@ export const ActionsList: FC = () => {
             ))}
             <li
                 className={"newTask__mainInfo-addAction"}
-                onClick={() => setNewActionModalState((prev) => !prev)}
+                onClick={unfocusActions}
             >
                 <ReactSVG
                     className="add-actions"
                     src={require("../../../../Image/plus-ico.svg").default}
                 />
                 <div
-                    className={"newAction__modal" + (newActionModalState ? " active" : "")}
+                    className={
+                        "newAction__modal" +
+                        (newActionModalState ? " active" : "")
+                    }
                     onClick={(e) => e.stopPropagation()}
                     ref={newActionModal}
                 >

@@ -1,19 +1,15 @@
 import { FC, useCallback, useEffect, useState } from "react";
 import { ReactSVG } from "react-svg";
-import { arrayCalendar } from "../../types/types";
+import { arrayCalendar } from "../../@types/types";
 import { CalendarItem } from "./CalendarItem";
 
-interface CalendarProps {
-    setDate: (value: Date) => void;
+interface ICalendar {
+    setDate: React.Dispatch<React.SetStateAction<Date>>
     calendarModalState: boolean;
-    setCalendarModalState: (value: boolean) => void;
+    setCalendarModalState: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export const Calendar: FC<CalendarProps> = ({
-    setDate,
-    calendarModalState,
-    setCalendarModalState,
-}) => {
+export const Calendar: FC<ICalendar> = ({ setDate, calendarModalState, setCalendarModalState }) => {
     let date = new Date();
 
     const [calendarArray, setCalendarArray] = useState<arrayCalendar[]>([]);
@@ -21,7 +17,7 @@ export const Calendar: FC<CalendarProps> = ({
     const [currentFirstDayInMonth, setCurrentFirstDayInMonth] = useState<Date>(
         new Date(date.getFullYear(), date.getMonth(), 1)
     );
-    
+
     const fillRows = (
         date: Date,
         countDaysInMonth: number,
@@ -315,13 +311,14 @@ export const Calendar: FC<CalendarProps> = ({
                     <p>sun</p>
                 </div>
                 <div className="calendar__main-grid">
-                    {calendarArray.map((item, index) => (
+                    {calendarArray.map((item, index) => 
                         <CalendarItem
                             key={index}
                             item={item}
                             setCalendarArray={setCalendarArray}
+                            setCalendarModalState={setCalendarModalState}
                         />
-                    ))}
+                    )}
                 </div>
             </div>
             <div

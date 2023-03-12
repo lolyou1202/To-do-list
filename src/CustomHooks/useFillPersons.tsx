@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { person } from "../types/types";
+import { person } from "../@types/types";
 
 export const useFillPersons = (persons: person[]) => {
     const [IdPickedPersons, setIdPickedPersons] = useState<number[]>([]);

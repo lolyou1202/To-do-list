@@ -1,6 +1,6 @@
-import { AvailableActions, person } from "../types/types"
+import { AvailableActions, noteList, person, typeStage } from "../@types/types"
 
-export let ActionsBackgrounds = [
+export let ActionsBackgrounds: string[] = [
     "#C3BEF0",
     "#B9D7EA",
     "#E84A5F",
@@ -75,4 +75,38 @@ export let PossiblePersons: person[] = [
         invited: false,
         picked: false,
     }
+]
+
+export let PossibleNoteList: noteList[] = [
+    {
+        id: 1,
+        name: "Create new project",
+        description: "At the conference center",
+        priority: "Hight",
+        action: 1,
+        date: new Date(2023, 1, 23, 12, 0),
+        invite: [1, 3, 4],
+        stage: "Undone",
+    },
+    {
+        id: 2,
+        name: "Create new project",
+        description: "At the conference center",
+        priority: "Medium",
+        action: 3,
+        date: new Date(2022, 12, 12, 18, 30),
+        invite: [2, 5],
+        stage: "Consummation",
+    }
+]
+
+export let PossibleStages: typeStage[] = [
+    {
+        name: "Undone",
+        state: true,
+    },
+    {
+        name: "Consummation",
+        state: false,
+    },
 ]

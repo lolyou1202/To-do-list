@@ -1,27 +1,14 @@
-import React, {
-    FC,
-    useCallback,
-    useContext,
-    useEffect,
-    useRef,
-    useState,
-} from "react";
+import React, { FC, useCallback, useContext, useEffect, useRef, useState } from "react";
 import { ReactSVG } from "react-svg";
-import { AvailableActions } from "../../../../types/types";
-import {
-    AvailableActionsContext,
-    ContextAvailableActions,
-} from "../../../../Context/Context";
-import { ActionsBackgrounds } from "../../../../settings/settings";
+import { AvailableActions } from "../../../../@types/types";
+import { AvailableActionsContext, ContextAvailableActions } from "../../../../Context/Context";
+import { ActionsBackgrounds } from "../../../../@settings/settings";
 import { Action } from "./Action";
 
 export const ActionsList: FC = () => {
-    const { availableActions, setAvailableActions } = useContext(
-        AvailableActionsContext
-    ) as ContextAvailableActions;
+    const { availableActions, setAvailableActions } = useContext(AvailableActionsContext) as ContextAvailableActions;
 
-    const [bacgroundActions, setBacgroundActions] =
-        useState<string[]>(ActionsBackgrounds);
+    const [bacgroundActions, setBacgroundActions] = useState<string[]>(ActionsBackgrounds);
     const [newActionInput, setNewActionInput] = useState("");
     const [newActionModalState, setNewActionModalState] = useState(false);
 
@@ -41,16 +28,13 @@ export const ActionsList: FC = () => {
         setAvailableActions(newAvailableActions)
     };
 
-    const updateBacgroundActions = useCallback(
-        () =>
-            bacgroundActions.length === 0 &&
-            setBacgroundActions(ActionsBackgrounds),
-        [bacgroundActions]
+    const updateBacgroundActions = useCallback(() =>
+        bacgroundActions.length === 0 &&
+        setBacgroundActions(ActionsBackgrounds),
+    [bacgroundActions]
     );
 
-    const newActionEnterHandler = (
-        event: React.KeyboardEvent<HTMLInputElement>
-    ) => {
+    const newActionEnterHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
         const updateBacgroundActions = [...bacgroundActions];
         if (event.key === "Enter" && event.currentTarget.value !== "") {
             let rand = Math.floor(
@@ -65,14 +49,14 @@ export const ActionsList: FC = () => {
             setBacgroundActions(
                 updateBacgroundActions.filter((_, i) => i !== rand)
             );
-            setAvailableActions((prev) => [...prev, newItem]);
+            setAvailableActions(prev => [...prev, newItem]);
             setNewActionInput("");
             setNewActionModalState(false);
         }
     };
 
     const unfocusActions = () => {
-        setNewActionModalState((prev) => !prev);
+        setNewActionModalState(prev => !prev);
         const disabledPick = [...availableActions].map((i) => {
             i.picked = false;
             return i;
@@ -87,13 +71,11 @@ export const ActionsList: FC = () => {
                 newActionModal.current &&
                 !newActionModal.current.contains(event.target as HTMLElement)
             ) {
-                setNewActionModalState((prev) => !prev);
+                setNewActionModalState(prev => !prev);
             }
         };
         document.addEventListener("mousedown", handleClickOutside);
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
+        return () => document.removeEventListener("mousedown", handleClickOutside);
     }, [newActionModalState]);
 
     useEffect(() => {
@@ -101,12 +83,12 @@ export const ActionsList: FC = () => {
         // eslint-disable-next-line
     }, []);
     useEffect(() => {
-        updateBacgroundActions();
+        updateBacgroundActions()
     }, [updateBacgroundActions]);
 
     return (
         <ul className="newTask__mainInfo-actions">
-            {availableActions.map((item) => (
+            {availableActions.map(item => (
                 <Action item={item} key={item.id} />
             ))}
             <li
@@ -118,16 +100,13 @@ export const ActionsList: FC = () => {
                     src={require("../../../../Image/plus-ico.svg").default}
                 />
                 <div
-                    className={
-                        "newAction__modal" +
-                        (newActionModalState ? " active" : "")
-                    }
-                    onClick={(e) => e.stopPropagation()}
+                    className={"newAction__modal" + (newActionModalState ? " active" : "")}
+                    onClick={e => e.stopPropagation()}
                     ref={newActionModal}
                 >
                     <input
                         value={newActionInput}
-                        onChange={(e) => setNewActionInput(e.target.value)}
+                        onChange={e => setNewActionInput(e.target.value)}
                         onKeyDown={newActionEnterHandler}
                         type="text"
                         placeholder="New notes"

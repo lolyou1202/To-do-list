@@ -1,14 +1,9 @@
 import { FC, useContext, useRef } from "react";
-import { priorityEnum } from "../../../types/enums";
-import {
-    ContextPropertyToDo,
-    PropertyToDoContext,
-} from "../../../Context/Context";
+import { priorityEnum } from "../../../@types/enums";
+import { ContextPropertyToDo, PropertyToDoContext } from "../../../Context/Context";
 
 export const Priority: FC = () => {
-    const { propertyToDo, setProppertyToDo } = useContext(
-        PropertyToDoContext
-    ) as ContextPropertyToDo;
+    const { propertyToDo, setProppertyToDo } = useContext(PropertyToDoContext) as ContextPropertyToDo;
 
     const track = useRef(null);
 
@@ -17,25 +12,25 @@ export const Priority: FC = () => {
 
         switch (target.textContent) {
             case "Hight":
-                setProppertyToDo((prev) => ({
+                setProppertyToDo(prev => ({
                     ...prev,
                     priority: priorityEnum.HIGHT,
                 }));
                 break;
             case "Medium":
-                setProppertyToDo((prev) => ({
+                setProppertyToDo(prev => ({
                     ...prev,
                     priority: priorityEnum.MEDIUM,
                 }));
                 break;
             case "Low":
-                setProppertyToDo((prev) => ({
+                setProppertyToDo(prev => ({
                     ...prev,
                     priority: priorityEnum.LOW,
                 }));
                 break;
             case "None":
-                setProppertyToDo((prev) => ({
+                setProppertyToDo(prev => ({
                     ...prev,
                     priority: priorityEnum.NONE,
                 }));
@@ -48,37 +43,26 @@ export const Priority: FC = () => {
             <p>Priority</p>
             <ul className="newTask__priority-tabs">
                 <li
-                    className={
-                        "priority-item" +
-                        (propertyToDo.priority === "Hight" ? " active" : "")
-                    }
+                    className={"priority-item" + (propertyToDo.priority === "Hight" ? " active" : "")}
                     onClick={handlerChange}
                 >
                     Hight
                 </li>
                 <li
-                    className={
-                        "priority-item" +
-                        (propertyToDo.priority === "Medium" ? " active" : "")
-                    }
+                    className={"priority-item" + (propertyToDo.priority === "Medium" ? " active" : "")}
                     onClick={handlerChange}
                 >
                     Medium
                 </li>
                 <li
-                    className={
-                        "priority-item" +
-                        (propertyToDo.priority === "Low" ? " active" : "")
+                    className={"priority-item" + (propertyToDo.priority === "Low" ? " active" : "")
                     }
                     onClick={handlerChange}
                 >
                     Low
                 </li>
                 <li
-                    className={
-                        "priority-item" +
-                        (propertyToDo.priority === "None" ? " active" : "")
-                    }
+                    className={"priority-item" + (propertyToDo.priority === "None" ? " active" : "")}
                     onClick={handlerChange}
                 >
                     None

@@ -1,5 +1,5 @@
 import { FC, useContext } from "react";
-import { placeholderEnum } from "../../../../types/enums";
+import { placeholderEnum } from "../../../../@types/enums";
 import {
     ContextPropertyToDo,
     PropertyToDoContext,

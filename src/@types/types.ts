@@ -1,5 +1,25 @@
 import { priorityEnum } from "./enums"
 
+export type noteList = {
+    id: number
+    name: string
+    description: string
+    priority: string
+    action: number
+    date: Date
+    invite: number[]
+    stage: string
+}
+
+export type toDoProperty = {
+    name: string
+    description: string
+    priority: priorityEnum
+    invite: number[]
+    action: number | null
+    time: Date
+}
+
 export type person = {
     id: number
     name: string
@@ -8,15 +28,16 @@ export type person = {
     picked: boolean
 }
 
-export type noteList = {
+export type AvailableActions = {
     id: number
+    text: string
+    background: string
+    picked: boolean
+}
+
+export type typeStage = {
     name: string
-    description: string
-    priority: string
-    action: string
-    date: number[]
-    invite: number[]
-    stage: string
+    state: boolean
 }
 
 export type arrayCalendar = {
@@ -48,18 +69,3 @@ export type modalContentObj = {
     minutes: string[]
 }
 
-export type toDoProperty = {
-    name: string
-    description: string
-    priority: priorityEnum
-    invite: number[]
-    actions: number[]
-    time: Date
-}
-
-export type AvailableActions = {
-    id: number
-    text: string
-    background: string
-    picked: boolean
-}

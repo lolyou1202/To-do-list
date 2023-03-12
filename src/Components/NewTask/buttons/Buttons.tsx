@@ -1,4 +1,4 @@
-import { FC, useContext } from "react"
+import React, { FC, useContext } from "react"
 import {
     AvailableActionsContext,
     AvailablePersonsContext,
@@ -9,17 +9,15 @@ import {
     NoteListContext,
     PropertyToDoContext,
 } from "../../../Context/Context"
-import { priorityEnum } from "../../../types/enums"
+import { priorityEnum } from "../../../@types/enums"
 
-interface ButtonsProps {}
+interface IButtons {
+    setNewTaskModalState: React.Dispatch<React.SetStateAction<boolean>>
+}
 
-export const Buttons: FC<ButtonsProps> = () => {
-    const { noteList, setNoteList } = useContext(
-        NoteListContext
-    ) as ContextNoteList
-    const { setProppertyToDo } = useContext(
-        PropertyToDoContext
-    ) as ContextPropertyToDo
+export const Buttons: FC<IButtons> = ({ setNewTaskModalState }) => {
+    const { noteList, setNoteList } = useContext(NoteListContext) as ContextNoteList
+    const { propertyToDo, setProppertyToDo } = useContext(PropertyToDoContext) as ContextPropertyToDo
 
     const { setAvailableActions } = useContext(AvailableActionsContext) as ContextAvailableActions;
     const { setAvailablePersons } = useContext(AvailablePersonsContext) as ContextAvailablePersons;
@@ -30,7 +28,7 @@ export const Buttons: FC<ButtonsProps> = () => {
             description: "",
             priority: priorityEnum.HIGHT,
             invite: [],
-            actions: [],
+            action: null,
             time: new Date(),
         })
         setAvailableActions(prev => (
@@ -46,7 +44,26 @@ export const Buttons: FC<ButtonsProps> = () => {
             })
         ))
     }
-    const saveHandle = () => {}
+    const saveHandle = () => {
+        if (propertyToDo.name && propertyToDo.description && propertyToDo.action) {
+            const action = propertyToDo.action
+            setNoteList(prev => ([
+                ...prev,
+                {
+                    id: noteList.length + 1,
+                    name: propertyToDo.name,
+                    description: propertyToDo.description,
+                    priority: propertyToDo.priority,
+                    action: action,
+                    date: propertyToDo.time,
+                    invite: propertyToDo.invite,
+                    stage: "Undone",
+                },
+            ]))
+            recurringHandle()
+            setNewTaskModalState(false)
+        }
+    }
 
     return (
         <div className='newTask__buttons-block'>

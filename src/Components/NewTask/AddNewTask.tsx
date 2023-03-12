@@ -1,11 +1,11 @@
 import { FC } from "react";
 import { ReactSVG } from "react-svg";
 
-interface AddNewTaskProps {
-  setModalState: (value: boolean) => void;
+interface IAddNewTask {
+  setModalState: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const AddNewTask: FC<AddNewTaskProps> = ({ setModalState }) => {
+export const AddNewTask: FC<IAddNewTask> = ({ setModalState }) => {
   return (
     <button className="newTask" onClick={() => setModalState(true)}>
       <ReactSVG

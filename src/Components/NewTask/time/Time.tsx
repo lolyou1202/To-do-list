@@ -1,18 +1,9 @@
 import { FC, useCallback, useContext, useEffect, useState } from "react";
-import {
-    modalContentObj,
-    selectedDateObj,
-    selectsTimeState,
-} from "../../../types/types";
-import {
-    ContextPropertyToDo,
-    PropertyToDoContext,
-} from "../../../Context/Context";
+import { modalContentObj, selectedDateObj, selectsTimeState } from "../../../@types/types";
+import { ContextPropertyToDo, PropertyToDoContext } from "../../../Context/Context";
 
 export const Time: FC = () => {
-    const { setProppertyToDo } = useContext(
-        PropertyToDoContext
-    ) as ContextPropertyToDo;
+    const { setProppertyToDo } = useContext(PropertyToDoContext) as ContextPropertyToDo;
 
     const [modalState, setModalState] = useState<selectsTimeState>({
         year: false,
@@ -67,11 +58,7 @@ export const Time: FC = () => {
         return result;
     };
     const generateDays = () => {
-        const date = new Date(
-            new Date().getFullYear(),
-            new Date().getMonth() + 1,
-            0
-        ).getDate();
+        const date = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate();
         let result = [];
         for (let i = 0; i < date; i++) {
             result.push(i + 1);
@@ -137,13 +124,9 @@ export const Time: FC = () => {
     }, [selectedDate]);
 
     const generateСorrectTime = useCallback(
-        (atribute: keyof typeof selectedDate) => {
-            if (selectedDate[atribute] < 10) {
-                return "0" + selectedDate[atribute];
-            } else {
-                return Number(selectedDate[atribute]);
-            }
-        },
+        (atribute: keyof typeof selectedDate) => selectedDate[atribute] < 10
+            ? "0" + selectedDate[atribute]
+            : Number(selectedDate[atribute]),
         [selectedDate]
     );
 
@@ -157,38 +140,32 @@ export const Time: FC = () => {
         setModalState(state);
     };
 
-    const selectItemHandler = (
-        item: string | number,
-        index: number,
-        atribute: string
-    ) => {
+    const selectItemHandler = (item: string | number, index: number, atribute: string) => {
         switch (atribute) {
-            case "year":
-            case "day":
-                setSelectedDate((prev) => ({
+            case "year": case "day":
+                setSelectedDate(prev => ({
                     ...prev,
-                    [atribute]: Number(item),
+                    [atribute]: Number(item)
                 }));
                 break;
             case "month":
                 if (atribute === "month") {
-                    setSelectedDate((prev) => ({
+                    setSelectedDate(prev => ({
                         ...prev,
-                        [atribute]: index,
+                        [atribute]: index
                     }));
                 }
                 break;
-            case "hour":
-            case "minutes":
+            case "hour": case "minutes":
                 if (String(item)[0] === "0") {
-                    setSelectedDate((prev) => ({
+                    setSelectedDate(prev => ({
                         ...prev,
-                        [atribute]: Number(String(item)[1]),
+                        [atribute]: Number(String(item)[1])
                     }));
                 } else {
-                    setSelectedDate((prev) => ({
+                    setSelectedDate(prev => ({
                         ...prev,
-                        [atribute]: Number(item),
+                        [atribute]: Number(item)
                     }));
                 }
                 break;
@@ -204,7 +181,7 @@ export const Time: FC = () => {
     };
 
     useEffect(() => {
-        setProppertyToDo((prev) => ({
+        setProppertyToDo(prev => ({
             ...prev,
             time: new Date(
                 selectedDate.year,
@@ -237,18 +214,11 @@ export const Time: FC = () => {
                     >
                         {selectedDate.year}
                     </button>
-                    <div
-                        className={
-                            "selectTime__item-modal" +
-                            (modalState.year ? " active" : "")
-                        }
-                    >
+                    <div className={"selectTime__item-modal" + (modalState.year ? " active" : "")}>
                         {modalContent.year.map((item, index) => (
                             <p
                                 key={index}
-                                onClick={() =>
-                                    selectItemHandler(item, index, "year")
-                                }
+                                onClick={() => selectItemHandler(item, index, "year")}
                             >
                                 {item}
                             </p>
@@ -262,18 +232,11 @@ export const Time: FC = () => {
                     >
                         {generateСorrectMonth()}
                     </button>
-                    <div
-                        className={
-                            "selectTime__item-modal" +
-                            (modalState.month ? " active" : "")
-                        }
-                    >
+                    <div className={"selectTime__item-modal" + (modalState.month ? " active" : "")}>
                         {modalContent.month.map((item, index) => (
                             <p
                                 key={index}
-                                onClick={() =>
-                                    selectItemHandler(item, index, "month")
-                                }
+                                onClick={() => selectItemHandler(item, index, "month")}
                             >
                                 {item}
                             </p>
@@ -287,19 +250,11 @@ export const Time: FC = () => {
                     >
                         {selectedDate.day}
                     </button>
-                    <div
-                        className={
-                            "selectTime__item-modal" +
-                            (modalState.day ? " active" : "")
-                        }
-                    >
+                    <div className={"selectTime__item-modal" + (modalState.day ? " active" : "")}>
                         {modalContent.day.map((item, index) => (
                             <p
                                 key={index}
-                                onClick={() =>
-                                    selectItemHandler(item, index, "day")
-                                }
-                            >
+                                onClick={() => selectItemHandler(item, index, "day")}>
                                 {item}
                             </p>
                         ))}
@@ -311,22 +266,11 @@ export const Time: FC = () => {
                             <button onClick={() => wiewModalHandler("hour")}>
                                 {generateСorrectTime("hour")}
                             </button>
-                            <div
-                                className={
-                                    "selectTime__item-modal" +
-                                    (modalState.hour ? " active" : "")
-                                }
-                            >
+                            <div className={"selectTime__item-modal" + (modalState.hour ? " active" : "")}>
                                 {modalContent.hour.map((item, index) => (
                                     <p
                                         key={index}
-                                        onClick={() =>
-                                            selectItemHandler(
-                                                item,
-                                                index,
-                                                "hour"
-                                            )
-                                        }
+                                        onClick={() => selectItemHandler(item, index, "hour")}
                                     >
                                         {item}
                                     </p>
@@ -338,22 +282,11 @@ export const Time: FC = () => {
                             <button onClick={() => wiewModalHandler("minutes")}>
                                 {generateСorrectTime("minutes")}
                             </button>
-                            <div
-                                className={
-                                    "selectTime__item-modal" +
-                                    (modalState.minutes ? " active" : "")
-                                }
-                            >
+                            <div className={"selectTime__item-modal" + (modalState.minutes ? " active" : "")}>
                                 {modalContent.minutes.map((item, index) => (
                                     <p
                                         key={index}
-                                        onClick={() =>
-                                            selectItemHandler(
-                                                item,
-                                                index,
-                                                "minutes"
-                                            )
-                                        }
+                                        onClick={() => selectItemHandler(item, index, "minutes")}
                                     >
                                         {item}
                                     </p>

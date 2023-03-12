@@ -1,13 +1,12 @@
 import React, { createContext } from "react";
-import { AvailableActions, noteList, person, toDoProperty } from "../types/types";
+import { AvailableActions, noteList, person, toDoProperty } from "../@types/types";
 
 export type ContextNoteList = {
     noteList: noteList[],
     setNoteList: React.Dispatch<React.SetStateAction<noteList[]>>
 };
-
-
 export const NoteListContext = createContext<ContextNoteList | null>(null);
+
 
 export type ContextPropertyToDo = {
     propertyToDo: toDoProperty,

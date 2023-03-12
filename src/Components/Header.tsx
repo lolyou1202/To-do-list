@@ -1,17 +1,16 @@
-import { FC, useCallback, useEffect, useState } from "react";
+import React, { FC, useCallback, useEffect, useState } from "react";
 import { ReactSVG } from "react-svg";
 
-interface HeaderProps {
+interface IHeader {
     date: Date;
-    setCalendarModalState: (value: boolean) => void;
+    setCalendarModalState: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const Header: FC<HeaderProps> = ({ date, setCalendarModalState }) => {
+export const Header: FC<IHeader> = ({ date, setCalendarModalState }) => {
 
     const [headerDate, setHeaderDate] = useState<string[]>(['', ''])
 
-    const formatedRelativeToday = useCallback(
-      () => {
+    const formatedRelativeToday = useCallback(() => {
         const recentDays = (modifier: number) => {
             const names = [
                 "Tomorrow",
@@ -70,9 +69,8 @@ export const Header: FC<HeaderProps> = ({ date, setCalendarModalState }) => {
             return names[modifier]
         }
         const currentDate = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate())
-        //const day = date.getDate()
-        let matchedDate = ''
 
+        let matchedDate = ''
         let countDays = (date.getTime() - currentDate.getTime()) / (1000 * 60 * 60 * 24)
 
         if (countDays === 0) {
@@ -117,11 +115,9 @@ export const Header: FC<HeaderProps> = ({ date, setCalendarModalState }) => {
         }
 
         return matchedDate
-      },
-      [date],
-    )
-    const formatedHeaderDate = useCallback(
-      () => {
+    }, [date])
+
+    const formatedHeaderDate = useCallback(() => {
         const monthNames = [
             "Jan",
             "Feb",
@@ -137,27 +133,25 @@ export const Header: FC<HeaderProps> = ({ date, setCalendarModalState }) => {
             "Dec",
         ];
         const weekNames = [
+            "Sunday",
             "Monday",
             "Tuesday",
             "Wednesday",
             "Thursday",
             "Friday",
-            "Saturday",
-            "Sunday"
+            "Saturday"
         ];
         const day = date.getDate()
         const month = monthNames[date.getMonth()]
         const year = date.getFullYear()
-        const week = weekNames[date.getDay() - 1]
+        const week = weekNames[date.getDay()]
 
         return `${day} ${month} ${year}, ${week}`
-      },
-      [date],
-    )
+    }, [date])
 
-    useEffect(() => {
-        setHeaderDate([formatedRelativeToday(), formatedHeaderDate()])
-    }, [formatedRelativeToday, formatedHeaderDate])
+    useEffect(() => 
+        setHeaderDate([formatedRelativeToday(), formatedHeaderDate()]),
+    [formatedRelativeToday, formatedHeaderDate])
     
 
     return (

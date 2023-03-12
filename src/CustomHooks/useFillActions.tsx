@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
-import { AvailableActions } from "../types/types";
+import { AvailableActions } from "../@types/types";
 
 export const useFillActions = (actions: AvailableActions[]) => {
-    const [IdPickedActions, setIdPickedPersons] = useState<number[]>([]);
+    const [IdPickedActions, setIdPickedPersons] = useState<number | undefined>();
 
     const callback = useCallback(() => {
         setIdPickedPersons(
-            actions.filter((item) => item.picked).map((item) => item.id)
+            actions.find((item) => item.picked)?.id
         );
     }, [actions]);
 

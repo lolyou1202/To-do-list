@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { atributeToDoEnum, placeholderEnum } from "../../../types/enums";
+import { atributeToDoEnum, placeholderEnum } from "../../../@types/enums";
 import { ActionsList } from "./actions/ActionsList";
 import { TextAreaBlock } from "./textArea/TextAreaBlock";
 

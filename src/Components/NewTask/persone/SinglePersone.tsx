@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { ReactSVG } from "react-svg";
-import { person } from "../../../types/types";
+import { person } from "../../../@types/types";
 import {
     AvailablePersonsContext,
     ContextAvailablePersons,
@@ -12,19 +12,13 @@ interface PersoneProps {
     personModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const SinglePersone: React.FC<PersoneProps> = ({
-    item,
-    type,
-    personModal,
-}) => {
-    const { availablePersons, setAvailablePersons } = useContext(
-        AvailablePersonsContext
-    ) as ContextAvailablePersons;
+export const SinglePersone: React.FC<PersoneProps> = ({ item, type, personModal }) => {
+    const { availablePersons, setAvailablePersons } = useContext(AvailablePersonsContext) as ContextAvailablePersons;
 
     const personClickHandler = () => {
         if (type === "inList") {
             personModal(false);
-            const deletePersone = [...availablePersons].map((i) => {
+            const deletePersone = [...availablePersons].map(i => {
                 if (i.id === item.id) {
                     i.picked = !i.picked;
                 }
@@ -32,7 +26,7 @@ export const SinglePersone: React.FC<PersoneProps> = ({
             });
             setAvailablePersons(deletePersone);
         } else if (type === "inModal") {
-            const addPersone = [...availablePersons].map((i) => {
+            const addPersone = [...availablePersons].map(i => {
                 if (i.id === item.id) {
                     i.invited = !i.invited;
                 }
@@ -44,7 +38,7 @@ export const SinglePersone: React.FC<PersoneProps> = ({
 
     const closePersonClickHandler = (e: React.MouseEvent) => {
         e.stopPropagation();
-        const newPersoneList = [...availablePersons].map((i) => {
+        const newPersoneList = [...availablePersons].map(i => {
             if (i.id === item.id) {
                 i.invited = !i.invited;
                 i.picked = false;
@@ -56,12 +50,8 @@ export const SinglePersone: React.FC<PersoneProps> = ({
 
     return (
         <div
-            className={
-                "newTask__invite-persone" + (item.picked ? " active" : "")
-            }
-            style={{
-                backgroundImage: `url(${require(`../../../Image/${item.avatar}`)})`,
-            }}
+            className={"newTask__invite-persone" + (item.picked ? " active" : "")}
+            style={{ backgroundImage: `url(${require(`../../../Image/${item.avatar}`)})` }}
             onClick={personClickHandler}
         >
             <ReactSVG

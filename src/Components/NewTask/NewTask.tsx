@@ -1,18 +1,18 @@
-import { FC, useEffect, useState, useContext } from "react";
-import { toDoProperty } from "../../types/types";
+import React, { FC, useEffect, useState, useContext } from "react";
+import { toDoProperty } from "../../@types/types";
 import { AvailableActionsContext, AvailablePersonsContext, ContextAvailableActions, ContextAvailablePersons, PropertyToDoContext } from "../../Context/Context";
 import { MainInfo } from "./mainInfo/MainInfo";
 import { Buttons } from "./buttons/Buttons";
 import { Time } from "./time/Time";
 import { Priority } from "./priority/Priority";
 import { Persone } from "./persone/Persone";
-import { priorityEnum } from "../../types/enums";
+import { priorityEnum } from "../../@types/enums";
 import { useFillActions } from "../../CustomHooks/useFillActions";
 import { useFillPersons } from "../../CustomHooks/useFillPersons";
 
 interface NewTaskProps {
     newTaskModalState: boolean;
-    setNewTaskModalState: (value: boolean) => void;
+    setNewTaskModalState: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export const NewTask: FC<NewTaskProps> = ({ newTaskModalState, setNewTaskModalState }) => {
@@ -21,41 +21,42 @@ export const NewTask: FC<NewTaskProps> = ({ newTaskModalState, setNewTaskModalSt
 
     const IdPickedActions = useFillActions(availableActions);
     const IdPickedPersons = useFillPersons(availablePersons);
-
+    
     const [propertyToDo, setProppertyToDo] = useState<toDoProperty>({
         name: "",
         description: "",
         priority: priorityEnum.HIGHT,
         invite: [],
-        actions: [],
+        action: null,
         time: new Date()
     });
-    console.log(propertyToDo);
 
     useEffect(() => {
-        setProppertyToDo((prev) => ({
-            ...prev,
-            actions: IdPickedActions,
-        }));
+        if (IdPickedActions) {
+            setProppertyToDo(prev => ({
+                ...prev,
+                action: IdPickedActions
+            }));
+        }
     }, [IdPickedActions]);
     useEffect(() => {
-        setProppertyToDo((prev) => ({
-            ...prev,
-            invite: IdPickedPersons,
-        }));
+        if (IdPickedPersons.length !== 0) {
+            setProppertyToDo(prev => ({
+                ...prev,
+                invite: IdPickedPersons
+            }));
+        }
     }, [IdPickedPersons]);
 
     return (
-        <PropertyToDoContext.Provider
-            value={{ propertyToDo, setProppertyToDo }}
-        >
+        <PropertyToDoContext.Provider value={{ propertyToDo, setProppertyToDo }}>
             <div className={"newTask-modal" + (newTaskModalState ? " active" : "")}>
                 <div>
                     <MainInfo />
                     <Priority />
                     <Time />
                     <Persone />
-                    <Buttons />
+                    <Buttons setNewTaskModalState={setNewTaskModalState} />
                     <div
                         className="navButton"
                         onClick={() => setNewTaskModalState(false)}

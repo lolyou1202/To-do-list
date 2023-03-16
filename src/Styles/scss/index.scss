@@ -190,7 +190,7 @@ html {
         padding: 0 30px;
         margin: 20px 0;
         &-input {
-            width: calc(100% - 40px);
+            width: calc(100% - 60px);
             height: 30px;
             border: none;
             border-radius: 50px;
@@ -198,33 +198,18 @@ html {
             font-weight: 400;
             font-size: 14px;
             color: #fff;
-            padding: 0 20px;
+            padding: 0 40px 0 20px;
             outline: none;
             box-shadow: 0px 4px 6px 0px rgba(34, 60, 80, 0.2);
-            &::placeholder {
-                position: relative;
-                left: calc(50% - 10px);
-                font-weight: 400;
-                font-size: 14px;
-                color: #fff;
-                transition: color 0.2s ease-in-out;
-            }
-            &:focus + .search-ico {
-                svg {
-                    stroke: transparent;
-                }
-            }
-            &:focus::-webkit-input-placeholder {
-                color: transparent;
-            }
         }
         &-ico {
             width: 20px;
             height: 20px;
             position: absolute;
-            right: calc(50% + 15px);
+            right: 40px;
             top: 50%;
             transform: translateY(-50%);
+            cursor: pointer;
             svg {
                 width: 20px;
                 height: 20px;
@@ -377,6 +362,14 @@ html {
             &:not(:last-child) {
                 margin-bottom: 20px;
             }
+        }
+        &__message {
+            text-align: center;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 100%;
+            color: #212121;
+            margin-top: 30px;
         }
     }
 }

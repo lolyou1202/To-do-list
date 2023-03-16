@@ -27,3 +27,9 @@ export type ContextAvailablePersons = {
     setAvailablePersons: React.Dispatch<React.SetStateAction<person[]>>
 };
 export const AvailablePersonsContext = createContext<ContextAvailablePersons | null>(null);
+
+export type ContextSearch = {
+    searchState: string,
+    setSearchState: React.Dispatch<React.SetStateAction<string>>
+};
+export const SearchContext = createContext<ContextSearch | null>(null);

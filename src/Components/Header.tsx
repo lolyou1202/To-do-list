@@ -77,7 +77,7 @@ export const Header: FC<IHeader> = ({ date, setCalendarModalState }) => {
             matchedDate = recentDays(1)
         } else if (countDays > 0) {
             if (countDays === 1) {
-                matchedDate = recentDays(2)
+                matchedDate = recentDays(0)
             } else if (1 < countDays && countDays < 7) {
                 matchedDate = underWeek(0, countDays)
             } else if (6 < countDays && countDays < 14) {
@@ -96,7 +96,7 @@ export const Header: FC<IHeader> = ({ date, setCalendarModalState }) => {
         } else if (countDays < 0) {
             countDays = Math.abs(countDays)
             if (countDays === 1) {
-                matchedDate = recentDays(1)
+                matchedDate = recentDays(2)
             } else if (1 < countDays && countDays < 7) {
                 matchedDate = underWeek(1, countDays)
             } else if (6 < countDays && countDays < 14) {

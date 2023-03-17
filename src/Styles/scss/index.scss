@@ -395,6 +395,7 @@ html {
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 15px;
     position: absolute;
     bottom: 0;
     height: 60px;
@@ -899,7 +900,11 @@ html {
         outline: none;
         background: #fff;
         cursor: pointer;
-        color: #212121;
+        font-weight: 400;
+        font-size: 16px;
+        color: #fff;
+        line-height: 100%;
+        color: #2471ff;
         &.recurring {
             color: #fff;
             background: none;
@@ -910,6 +915,12 @@ html {
             padding: 30px;
             gap: 15px;
         }
+    }
+    p {
+        font-weight: 400;
+        font-size: 18px;
+        color: #fff;
+        line-height: 100%;
     }
     .plus-ico {
         display: flex;
@@ -922,13 +933,6 @@ html {
             height: 30px;
             stroke: #2471ff;
         }
-    }
-    p {
-        font-weight: 400;
-        font-size: 18px;
-        color: #fff;
-        line-height: 100%;
-        margin-left: 10px;
     }
 }
 .navButton {

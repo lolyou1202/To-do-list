@@ -10,6 +10,7 @@ import { NotFoundToDo } from './NotFoundToDo'
 import { ToDoItem } from './ToDoItem'
 import { useFindFilter } from '../../CustomHooks/useFindFilter'
 import { useSearchFilter } from '../../CustomHooks/useSearchFilter'
+import { useSortList } from '../../CustomHooks/useSortList'
 
 interface IToDoList {
     stageState: typeStage[]
@@ -22,6 +23,11 @@ export const ToDoList: FC<IToDoList> = ({ stageState, date }) => {
 
     const findFilter = useFindFilter()
     const searchFilter = useSearchFilter()
+    const sortList = useSortList()
+
+    const allFilterMethods = (stage: string) => {
+
+    }
 
     const fillToDo = useCallback(() => {
         switch (true) {

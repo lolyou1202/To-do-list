@@ -4,7 +4,10 @@ export type noteList = {
     id: number
     name: string
     description: string
-    priority: string
+    priority: {
+        name: string,
+        value: number
+    }
     action: number
     date: Date
     invite: number[]

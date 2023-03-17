@@ -20,7 +20,7 @@ export default function App() {
 
     const [calendarModalState, setCalendarModalState] = useState<boolean>(false);
     const [newTaskModalState, setNewTaskModalState] = useState<boolean>(false);
-    
+
     return (
         <NoteListContext.Provider value={{ noteList, setNoteList }}>
             <AvailableActionsContext.Provider value={{ availableActions, setAvailableActions }}>

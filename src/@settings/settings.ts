@@ -1,5 +1,138 @@
 import { AvailableActions, noteList, person, typeStage } from "../@types/types"
 
+export let PossibleNoteList: noteList[] = [
+    {
+        id: 1,
+        name: "Create new project",
+        description: "At the conference center",
+        priority: {
+            name: "Hight",
+            value: 1
+        },
+        action: 1,
+        date: new Date(2023, 1, 23, 12, 0),
+        invite: [1, 3, 4],
+        stage: "Undone",
+    },
+    {
+        id: 2,
+        name: "Create new project",
+        description: "At the conference center",
+        priority: {
+            name: "Medium",
+            value: 2
+        },
+        action: 3,
+        date: new Date(2022, 12, 12, 18, 30),
+        invite: [2, 5],
+        stage: "Consummation",
+    },
+    {
+        id: 3,
+        name: "Create new project",
+        description: "At the conference center",
+        priority: {
+            name: "Low",
+            value: 3
+        },
+        action: 2,
+        date: new Date(2023, 2, 16, 18, 30),
+        invite: [1, 2, 3, 4],
+        stage: "Undone",
+    },
+    {
+        id: 4,
+        name: "Create new project",
+        description: "At the conference center",
+        priority: {
+            name: "Medium",
+            value: 2
+        },
+        action: 3,
+        date: new Date(2023, 2, 16, 20, 30),
+        invite: [2, 5],
+        stage: "Undone",
+    },
+    {
+        id: 5,
+        name: "Weekly review",
+        description: "Wanda Square E5",
+        priority: {
+            name: "Hight",
+            value: 1
+        },
+        action: 4,
+        date: new Date(2023, 2, 16, 20, 0),
+        invite: [2],
+        stage: "Undone",
+    },
+    {
+        id: 6,
+        name: "Create new project",
+        description: "At the conference center",
+        priority: {
+            name: "Medium",
+            value: 2
+        },
+        action: 3,
+        date: new Date(2023, 1, 11, 11, 30),
+        invite: [2, 5],
+        stage: "Consummation",
+    },
+    {
+        id: 7,
+        name: "Create new project",
+        description: "At the conference center",
+        priority: {
+            name: "Medium",
+            value: 2
+        },
+        action: 3,
+        date: new Date(2022, 12, 12, 18, 30),
+        invite: [2, 5],
+        stage: "Consummation",
+    },
+    {
+        id: 8,
+        name: "Create new project",
+        description: "At the conference center",
+        priority: {
+            name: "Medium",
+            value: 2
+        },
+        action: 3,
+        date: new Date(2022, 12, 12, 18, 30),
+        invite: [2, 5],
+        stage: "Consummation",
+    },
+    {
+        id: 9,
+        name: "Create new project",
+        description: "At the conference center",
+        priority: {
+            name: "Hight",
+            value: 1
+        },
+        action: 3,
+        date: new Date(2022, 12, 12, 18, 30),
+        invite: [2, 5],
+        stage: "Consummation",
+    },
+    {
+        id: 10,
+        name: "Create new project",
+        description: "At the conference center",
+        priority: {
+            name: "None",
+            value: 4
+        },
+        action: 3,
+        date: new Date(2022, 12, 12, 18, 30),
+        invite: [2, 5],
+        stage: "Consummation",
+    },
+]
+
 export let ActionsBackgrounds: string[] = [
     "#C3BEF0",
     "#B9D7EA",
@@ -75,109 +208,6 @@ export let PossiblePersons: person[] = [
         invited: false,
         picked: false,
     }
-]
-
-export let PossibleNoteList: noteList[] = [
-    {
-        id: 1,
-        name: "Create new project",
-        description: "At the conference center",
-        priority: "Hight",
-        action: 1,
-        date: new Date(2023, 1, 23, 12, 0),
-        invite: [1, 3, 4],
-        stage: "Undone",
-    },
-    {
-        id: 2,
-        name: "Create new project",
-        description: "At the conference center",
-        priority: "Medium",
-        action: 3,
-        date: new Date(2022, 12, 12, 18, 30),
-        invite: [2, 5],
-        stage: "Consummation",
-    },
-    {
-        id: 3,
-        name: "Create new project",
-        description: "At the conference center",
-        priority: "Low",
-        action: 2,
-        date: new Date(2023, 2, 16, 18, 30),
-        invite: [1, 2, 3, 4],
-        stage: "Undone",
-    },
-    {
-        id: 4,
-        name: "Create new project",
-        description: "At the conference center",
-        priority: "Medium",
-        action: 3,
-        date: new Date(2023, 2, 16, 20, 30),
-        invite: [2, 5],
-        stage: "Undone",
-    },
-    {
-        id: 5,
-        name: "Weekly review",
-        description: "Wanda Square E5",
-        priority: "Hight",
-        action: 4,
-        date: new Date(2023, 2, 16, 20, 0),
-        invite: [2],
-        stage: "Undone",
-    },
-    {
-        id: 6,
-        name: "Create new project",
-        description: "At the conference center",
-        priority: "Medium",
-        action: 3,
-        date: new Date(2022, 12, 12, 18, 30),
-        invite: [2, 5],
-        stage: "Consummation",
-    },
-    {
-        id: 7,
-        name: "Create new project",
-        description: "At the conference center",
-        priority: "Medium",
-        action: 3,
-        date: new Date(2022, 12, 12, 18, 30),
-        invite: [2, 5],
-        stage: "Consummation",
-    },
-    {
-        id: 8,
-        name: "Create new project",
-        description: "At the conference center",
-        priority: "Medium",
-        action: 3,
-        date: new Date(2022, 12, 12, 18, 30),
-        invite: [2, 5],
-        stage: "Consummation",
-    },
-    {
-        id: 9,
-        name: "Create new project",
-        description: "At the conference center",
-        priority: "Hight",
-        action: 3,
-        date: new Date(2022, 12, 12, 18, 30),
-        invite: [2, 5],
-        stage: "Consummation",
-    },
-    {
-        id: 10,
-        name: "Create new project",
-        description: "At the conference center",
-        priority: "None",
-        action: 3,
-        date: new Date(2022, 12, 12, 18, 30),
-        invite: [2, 5],
-        stage: "Consummation",
-    },
 ]
 
 export let PossibleStages: typeStage[] = [

@@ -41,7 +41,7 @@ export const Stages: FC<IStages> = ({ date, stageState, setStageState }) => {
             {stageState.map(item => (
                 <li
                     className={
-                        'stages__item stages__undone' +
+                        'stages__item' +
                         (item.state ? ' active' : '')
                     }
                     onClick={() => handlerStageClick(item)}

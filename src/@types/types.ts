@@ -5,7 +5,7 @@ export type noteList = {
     name: string
     description: string
     priority: {
-        name: string,
+        name: priorityEnum,
         value: number
     }
     action: number
@@ -17,7 +17,10 @@ export type noteList = {
 export type toDoProperty = {
     name: string
     description: string
-    priority: priorityEnum
+    priority: {
+        name: priorityEnum,
+        value: number
+    },
     invite: number[]
     action: number | null
     time: Date

@@ -25,26 +25,25 @@ export const ToDoList: FC<IToDoList> = ({ stageState, date }) => {
     const searchFilter = useSearchFilter()
     const sortList = useSortList()
 
-    const allFilterMethods = (stage: string) => {
-
-    }
+    const allFilterMethods = useCallback((stage: string) => 
+        sortList(
+            searchFilter(
+                findFilter(noteList, stage, date),
+                searchState
+            )
+        )
+    , [date, findFilter, noteList, searchFilter, searchState, sortList])
 
     const fillToDo = useCallback(() => {
         switch (true) {
             case stageState.find(i => i.name === 'Undone')?.state:
-                return searchFilter(
-                    findFilter(noteList, 'Undone', date),
-                    searchState
-                )
+                return allFilterMethods('Undone')
             case stageState.find(i => i.name === 'Consummation')?.state:
-                return searchFilter(
-                    findFilter(noteList, 'Consummation', date),
-                    searchState
-                )
+                return allFilterMethods('Consummation')
             default:
                 return []
         }
-    }, [stageState, searchFilter, findFilter, searchState, noteList, date])
+    }, [stageState, allFilterMethods])
 
     return (
         <div className='toDo__list'>

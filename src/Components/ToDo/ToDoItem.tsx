@@ -49,7 +49,7 @@ export const ToDoItem: FC<IToDoItem> = ({ item }) => {
                 <h2 className='task-name'>{item.name}</h2>
                 <p className='task-description'>{item.description}</p>
             </div>
-            <div className={`task-priority ${item.priority}`}></div>
+            <div className={`task-priority ${item.priority.name}`}></div>
             <div
                 className='task-colorMark'
                 style={{

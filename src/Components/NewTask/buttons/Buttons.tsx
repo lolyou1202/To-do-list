@@ -26,7 +26,10 @@ export const Buttons: FC<IButtons> = ({ setNewTaskModalState }) => {
         setProppertyToDo({
             name: "",
             description: "",
-            priority: priorityEnum.HIGHT,
+            priority: {
+                name: priorityEnum.HIGHT,
+                value: 1
+            },
             invite: [],
             action: null,
             time: new Date(),

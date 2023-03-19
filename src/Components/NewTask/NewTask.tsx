@@ -25,7 +25,10 @@ export const NewTask: FC<NewTaskProps> = ({ newTaskModalState, setNewTaskModalSt
     const [propertyToDo, setProppertyToDo] = useState<toDoProperty>({
         name: "",
         description: "",
-        priority: priorityEnum.HIGHT,
+        priority: {
+            name: priorityEnum.HIGHT,
+            value: 1
+        },
         invite: [],
         action: null,
         time: new Date()

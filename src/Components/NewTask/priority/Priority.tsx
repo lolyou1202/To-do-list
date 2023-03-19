@@ -14,25 +14,37 @@ export const Priority: FC = () => {
             case "Hight":
                 setProppertyToDo(prev => ({
                     ...prev,
-                    priority: priorityEnum.HIGHT,
+                    priority: {
+                        name: priorityEnum.HIGHT,
+                        value: 1
+                    },
                 }));
                 break;
             case "Medium":
                 setProppertyToDo(prev => ({
                     ...prev,
-                    priority: priorityEnum.MEDIUM,
+                    priority: {
+                        name: priorityEnum.MEDIUM,
+                        value: 2
+                    },
                 }));
                 break;
             case "Low":
                 setProppertyToDo(prev => ({
                     ...prev,
-                    priority: priorityEnum.LOW,
+                    priority: {
+                        name: priorityEnum.LOW,
+                        value: 3
+                    },
                 }));
                 break;
             case "None":
                 setProppertyToDo(prev => ({
                     ...prev,
-                    priority: priorityEnum.NONE,
+                    priority: {
+                        name: priorityEnum.NONE,
+                        value: 4
+                    },
                 }));
                 break;
         }
@@ -43,33 +55,33 @@ export const Priority: FC = () => {
             <p>Priority</p>
             <ul className="newTask__priority-tabs">
                 <li
-                    className={"priority-item" + (propertyToDo.priority === "Hight" ? " active" : "")}
+                    className={"priority-item" + (propertyToDo.priority.name === "Hight" ? " active" : "")}
                     onClick={handlerChange}
                 >
                     Hight
                 </li>
                 <li
-                    className={"priority-item" + (propertyToDo.priority === "Medium" ? " active" : "")}
+                    className={"priority-item" + (propertyToDo.priority.name === "Medium" ? " active" : "")}
                     onClick={handlerChange}
                 >
                     Medium
                 </li>
                 <li
-                    className={"priority-item" + (propertyToDo.priority === "Low" ? " active" : "")
+                    className={"priority-item" + (propertyToDo.priority.name === "Low" ? " active" : "")
                     }
                     onClick={handlerChange}
                 >
                     Low
                 </li>
                 <li
-                    className={"priority-item" + (propertyToDo.priority === "None" ? " active" : "")}
+                    className={"priority-item" + (propertyToDo.priority.name === "None" ? " active" : "")}
                     onClick={handlerChange}
                 >
                     None
                 </li>
             </ul>
             <div
-                className={`newTask__priority-track ${propertyToDo.priority}`}
+                className={`newTask__priority-track ${propertyToDo.priority.name}`}
                 ref={track}
             ></div>
         </div>

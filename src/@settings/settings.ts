@@ -1,3 +1,4 @@
+import { priorityEnum } from "../@types/enums"
 import { AvailableActions, noteList, person, typeStage } from "../@types/types"
 
 export let PossibleNoteList: noteList[] = [
@@ -6,7 +7,7 @@ export let PossibleNoteList: noteList[] = [
         name: "Create new project",
         description: "At the conference center",
         priority: {
-            name: "Hight",
+            name: priorityEnum.HIGHT,
             value: 1
         },
         action: 1,
@@ -19,7 +20,7 @@ export let PossibleNoteList: noteList[] = [
         name: "Create new project",
         description: "At the conference center",
         priority: {
-            name: "Medium",
+            name: priorityEnum.MEDIUM,
             value: 2
         },
         action: 3,
@@ -32,7 +33,7 @@ export let PossibleNoteList: noteList[] = [
         name: "Create new project",
         description: "At the conference center",
         priority: {
-            name: "Low",
+            name: priorityEnum.LOW,
             value: 3
         },
         action: 2,
@@ -45,7 +46,7 @@ export let PossibleNoteList: noteList[] = [
         name: "Create new project",
         description: "At the conference center",
         priority: {
-            name: "Medium",
+            name: priorityEnum.MEDIUM,
             value: 2
         },
         action: 3,
@@ -58,7 +59,7 @@ export let PossibleNoteList: noteList[] = [
         name: "Weekly review",
         description: "Wanda Square E5",
         priority: {
-            name: "Hight",
+            name: priorityEnum.HIGHT,
             value: 1
         },
         action: 4,
@@ -71,7 +72,7 @@ export let PossibleNoteList: noteList[] = [
         name: "Create new project",
         description: "At the conference center",
         priority: {
-            name: "Medium",
+            name: priorityEnum.MEDIUM,
             value: 2
         },
         action: 3,
@@ -84,7 +85,7 @@ export let PossibleNoteList: noteList[] = [
         name: "Create new project",
         description: "At the conference center",
         priority: {
-            name: "Medium",
+            name: priorityEnum.MEDIUM,
             value: 2
         },
         action: 3,
@@ -97,7 +98,7 @@ export let PossibleNoteList: noteList[] = [
         name: "Create new project",
         description: "At the conference center",
         priority: {
-            name: "Medium",
+            name: priorityEnum.MEDIUM,
             value: 2
         },
         action: 3,
@@ -110,7 +111,7 @@ export let PossibleNoteList: noteList[] = [
         name: "Create new project",
         description: "At the conference center",
         priority: {
-            name: "Hight",
+            name: priorityEnum.HIGHT,
             value: 1
         },
         action: 3,
@@ -123,7 +124,7 @@ export let PossibleNoteList: noteList[] = [
         name: "Create new project",
         description: "At the conference center",
         priority: {
-            name: "None",
+            name: priorityEnum.NONE,
             value: 4
         },
         action: 3,

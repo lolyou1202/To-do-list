@@ -12,3 +12,8 @@ export enum priorityEnum {
     LOW = 'Low',
     NONE = 'None'
 }
+
+export enum stagesEnum {
+    UNDONE = 'Undone',
+    CONSUMMATION = 'Consummation',
+}

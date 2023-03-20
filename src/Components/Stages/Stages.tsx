@@ -1,4 +1,5 @@
 import React, { FC, useCallback, useContext } from 'react'
+import { stagesEnum } from '../../@types/enums'
 import { typeStage } from '../../@types/types'
 import {
     ContextNoteList,
@@ -31,7 +32,7 @@ export const Stages: FC<IStages> = ({ date, stageState, setStageState }) => {
     }
 
     const markerValue = useCallback(() =>
-            searchFilter(findFilter(noteList, 'Undone', date), searchState)
+            searchFilter(findFilter(noteList, stagesEnum.UNDONE, date), searchState)
                 .length,
         [date, findFilter, searchFilter, searchState, noteList]
     )
@@ -48,7 +49,7 @@ export const Stages: FC<IStages> = ({ date, stageState, setStageState }) => {
                     key={item.name}
                 >
                     <p>{item.name}</p>
-                    {item.name === 'Undone' && markerValue() > 0 && (
+                    {item.name === stagesEnum.UNDONE && markerValue() > 0 && (
                         <div className='stages__marker'>{markerValue()}</div>
                     )}
                 </li>

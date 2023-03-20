@@ -416,10 +416,10 @@ html {
         transform: translateY(100%);
         transition: transform 0.5s ease-in-out;
         &.active {
+            transition: none;
             transform: translateY(0%);
         }
-        & > div {
-            margin-top: 40px;
+        &-container {
             overflow-y: auto;
             max-height: calc(100vh - 140px);
             &::-webkit-scrollbar {
@@ -936,16 +936,20 @@ html {
     }
 }
 .navButton {
-    position: absolute;
-    left: 50%;
-    top: 15px;
-    transform: translateX(-50%);
     background: #fff;
     width: 40px;
     height: 4px;
     border-radius: 5px;
-    cursor: pointer;
+    pointer-events: none;
     &.calendar {
-        top: calc(100% - 15px);
+        //top: calc(100% - 15px);
+    }
+    &-Area {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 40px;
+        cursor: pointer;
     }
 }

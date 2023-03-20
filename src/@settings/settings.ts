@@ -1,4 +1,4 @@
-import { priorityEnum } from "../@types/enums"
+import { priorityEnum, stagesEnum } from "../@types/enums"
 import { AvailableActions, noteList, person, typeStage } from "../@types/types"
 
 export let PossibleNoteList: noteList[] = [
@@ -13,7 +13,7 @@ export let PossibleNoteList: noteList[] = [
         action: 1,
         date: new Date(2023, 1, 23, 12, 0),
         invite: [1, 3, 4],
-        stage: "Undone",
+        stage: stagesEnum.UNDONE,
     },
     {
         id: 2,
@@ -26,7 +26,7 @@ export let PossibleNoteList: noteList[] = [
         action: 3,
         date: new Date(2022, 12, 12, 18, 30),
         invite: [2, 5],
-        stage: "Consummation",
+        stage: stagesEnum.CONSUMMATION,
     },
     {
         id: 3,
@@ -39,7 +39,7 @@ export let PossibleNoteList: noteList[] = [
         action: 2,
         date: new Date(2023, 2, 16, 18, 30),
         invite: [1, 2, 3, 4],
-        stage: "Undone",
+        stage: stagesEnum.UNDONE,
     },
     {
         id: 4,
@@ -52,7 +52,7 @@ export let PossibleNoteList: noteList[] = [
         action: 3,
         date: new Date(2023, 2, 16, 20, 30),
         invite: [2, 5],
-        stage: "Undone",
+        stage: stagesEnum.UNDONE,
     },
     {
         id: 5,
@@ -65,7 +65,7 @@ export let PossibleNoteList: noteList[] = [
         action: 4,
         date: new Date(2023, 2, 16, 20, 0),
         invite: [2],
-        stage: "Undone",
+        stage: stagesEnum.UNDONE,
     },
     {
         id: 6,
@@ -78,7 +78,7 @@ export let PossibleNoteList: noteList[] = [
         action: 3,
         date: new Date(2023, 1, 11, 11, 30),
         invite: [2, 5],
-        stage: "Consummation",
+        stage: stagesEnum.CONSUMMATION,
     },
     {
         id: 7,
@@ -91,7 +91,7 @@ export let PossibleNoteList: noteList[] = [
         action: 3,
         date: new Date(2022, 12, 12, 18, 30),
         invite: [2, 5],
-        stage: "Consummation",
+        stage: stagesEnum.CONSUMMATION,
     },
     {
         id: 8,
@@ -104,7 +104,7 @@ export let PossibleNoteList: noteList[] = [
         action: 3,
         date: new Date(2022, 12, 12, 18, 30),
         invite: [2, 5],
-        stage: "Consummation",
+        stage: stagesEnum.CONSUMMATION,
     },
     {
         id: 9,
@@ -117,7 +117,7 @@ export let PossibleNoteList: noteList[] = [
         action: 3,
         date: new Date(2022, 12, 12, 18, 30),
         invite: [2, 5],
-        stage: "Consummation",
+        stage: stagesEnum.CONSUMMATION,
     },
     {
         id: 10,
@@ -128,9 +128,74 @@ export let PossibleNoteList: noteList[] = [
             value: 4
         },
         action: 3,
-        date: new Date(2022, 12, 12, 18, 30),
-        invite: [2, 5],
-        stage: "Consummation",
+        date: new Date(2023, 2, 1, 0, 30),
+        invite: [2, 3, 4],
+        stage: stagesEnum.UNDONE,
+    },
+    {
+        id: 11,
+        name: "Create new project",
+        description: "At the conference center",
+        priority: {
+            name: priorityEnum.LOW,
+            value: 3
+        },
+        action: 1,
+        date: new Date(2023, 2, 8, 8, 30),
+        invite: [2, 3],
+        stage: stagesEnum.UNDONE,
+    },
+    {
+        id: 12,
+        name: "Create new project",
+        description: "fgbfghfghfgh",
+        priority: {
+            name: priorityEnum.HIGHT,
+            value: 1
+        },
+        action: 3,
+        date: new Date(2023, 2, 29, 15, 0),
+        invite: [3, 4],
+        stage: stagesEnum.UNDONE,
+    },
+    {
+        id: 13,
+        name: "Create new project",
+        description: "At the conference center",
+        priority: {
+            name: priorityEnum.LOW,
+            value: 3
+        },
+        action: 3,
+        date: new Date(2023, 2, 1, 0, 30),
+        invite: [2, 3, 4],
+        stage: stagesEnum.UNDONE,
+    },
+    {
+        id: 14,
+        name: "Create",
+        description: "At the conference center",
+        priority: {
+            name: priorityEnum.NONE,
+            value: 4
+        },
+        action: 3,
+        date: new Date(2023, 2, 1, 0, 30),
+        invite: [],
+        stage: stagesEnum.CONSUMMATION,
+    },
+    {
+        id: 15,
+        name: "Create",
+        description: "At the conference center",
+        priority: {
+            name: priorityEnum.LOW,
+            value: 3
+        },
+        action: 3,
+        date: new Date(2023, 2, 1, 0, 30),
+        invite: [],
+        stage: stagesEnum.CONSUMMATION,
     },
 ]
 
@@ -213,11 +278,11 @@ export let PossiblePersons: person[] = [
 
 export let PossibleStages: typeStage[] = [
     {
-        name: "Undone",
+        name: stagesEnum.UNDONE,
         state: true,
     },
     {
-        name: "Consummation",
+        name: stagesEnum.CONSUMMATION,
         state: false,
     },
 ]

@@ -9,10 +9,8 @@ export const Search: FC = () => {
 
     const changeInputSearch = (event: React.ChangeEvent<HTMLInputElement>) => setInputState(event.target.value)
     
-
     const saveSearchResult = () => setSearchState(inputState)
     
-
     return (
         <div className='search'>
             <input

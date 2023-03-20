@@ -11,6 +11,7 @@ import { ToDoItem } from './ToDoItem'
 import { useFindFilter } from '../../CustomHooks/useFindFilter'
 import { useSearchFilter } from '../../CustomHooks/useSearchFilter'
 import { useSortList } from '../../CustomHooks/useSortList'
+import { stagesEnum } from '../../@types/enums'
 
 interface IToDoList {
     stageState: typeStage[]
@@ -25,21 +26,20 @@ export const ToDoList: FC<IToDoList> = ({ stageState, date }) => {
     const searchFilter = useSearchFilter()
     const sortList = useSortList()
 
-    const allFilterMethods = useCallback((stage: string) => 
+    const allFilterMethods = useCallback((stage: stagesEnum) => 
         sortList(
             searchFilter(
-                findFilter(noteList, stage, date),
-                searchState
+                findFilter(noteList, stage, date), searchState
             )
         )
     , [date, findFilter, noteList, searchFilter, searchState, sortList])
 
     const fillToDo = useCallback(() => {
         switch (true) {
-            case stageState.find(i => i.name === 'Undone')?.state:
-                return allFilterMethods('Undone')
-            case stageState.find(i => i.name === 'Consummation')?.state:
-                return allFilterMethods('Consummation')
+            case stageState.find(i => i.name === stagesEnum.UNDONE)?.state:
+                return allFilterMethods(stagesEnum.UNDONE)
+            case stageState.find(i => i.name === stagesEnum.CONSUMMATION)?.state:
+                return allFilterMethods(stagesEnum.CONSUMMATION)
             default:
                 return []
         }

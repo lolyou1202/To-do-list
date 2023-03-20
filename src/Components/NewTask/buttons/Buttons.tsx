@@ -9,7 +9,7 @@ import {
     NoteListContext,
     PropertyToDoContext,
 } from "../../../Context/Context"
-import { priorityEnum } from "../../../@types/enums"
+import { priorityEnum, stagesEnum } from "../../../@types/enums"
 
 interface IButtons {
     setNewTaskModalState: React.Dispatch<React.SetStateAction<boolean>>
@@ -60,7 +60,7 @@ export const Buttons: FC<IButtons> = ({ setNewTaskModalState }) => {
                     action: action,
                     date: propertyToDo.time,
                     invite: propertyToDo.invite,
-                    stage: "Undone",
+                    stage: stagesEnum.UNDONE,
                 },
             ]))
             recurringHandle()

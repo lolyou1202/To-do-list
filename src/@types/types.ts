@@ -1,4 +1,4 @@
-import { priorityEnum } from "./enums"
+import { priorityEnum, stagesEnum } from "./enums"
 
 export type noteList = {
     id: number
@@ -11,7 +11,7 @@ export type noteList = {
     action: number
     date: Date
     invite: number[]
-    stage: string
+    stage: stagesEnum
 }
 
 export type toDoProperty = {
@@ -42,7 +42,7 @@ export type AvailableActions = {
 }
 
 export type typeStage = {
-    name: string
+    name: stagesEnum
     state: boolean
 }
 

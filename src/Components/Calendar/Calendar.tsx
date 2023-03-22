@@ -322,9 +322,11 @@ export const Calendar: FC<ICalendar> = ({ setDate, calendarModalState, setCalend
                 </div>
             </div>
             <div
-                className="navButton calendar"
+                className='navButton-Area'
                 onClick={() => setCalendarModalState(false)}
-            ></div>
+            >
+                <div className='navButton'></div>
+            </div>
         </div>
     );
 };

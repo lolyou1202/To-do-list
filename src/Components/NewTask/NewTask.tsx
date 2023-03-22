@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState, useContext } from 'react'
+import React, { FC, useEffect, useState, useContext, useRef } from 'react'
 import { toDoProperty } from '../../@types/types'
 import {
     AvailableActionsContext,
@@ -36,8 +36,8 @@ export const NewTask: FC<NewTaskProps> = ({
     const IdPickedActions = useFillActions(availableActions)
     const IdPickedPersons = useFillPersons(availablePersons)
 
-
-    const dragControls = useDragControls()
+    //const ref = useRef<HTMLDivElement>(null)
+    //const dragControls = useDragControls()
 
     const [propertyToDo, setProppertyToDo] = useState<toDoProperty>({
         name: '',
@@ -73,22 +73,32 @@ export const NewTask: FC<NewTaskProps> = ({
             value={{ propertyToDo, setProppertyToDo }}
         >
             <motion.div
-                drag='y'
-                dragControls={dragControls}
-                dragListener={false}
-                dragMomentum={false}
-                className={
-                    'newTask-modal' + (newTaskModalState ? ' active' : '')
-                }
+                //ref={ref}
+                //drag='y'
+                //dragControls={dragControls}
+                //dragListener={false}
+                //dragMomentum={false}
+                //onDragEnd={(_, info) => {
+                //    console.log(info.point.y)
+                //    console.log(document.documentElement.clientWidth / 1.5)
+                //    if (info.point.y > document.documentElement.clientWidth / 1.5) {
+                //        setNewTaskModalState(false)
+                //        if (ref.current) {
+                //            console.log(123)
+                //            ref.current.style.transform = "translate(0px)"
+                //        }
+                //    } else {
+
+                //    }
+                //}}
+                className={'newTask-modal' + (newTaskModalState ? ' active' : '')}
             >
                 <div
-                    onPointerDown={e => dragControls.start(e)}
+                    //onPointerDown={e => dragControls.start(e)}
                     className='navButton-Area'
+                    onClick={() => setNewTaskModalState(false)}
                 >
-                    <div
-                        className='navButton'
-                        //onClick={() => setNewTaskModalState(false)}
-                    ></div>
+                    <div className='navButton'></div>
                 </div>
                 <div className='newTask-modal-container'>
                     <MainInfo />

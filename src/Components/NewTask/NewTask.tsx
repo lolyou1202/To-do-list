@@ -15,7 +15,6 @@ import { Persone } from './persone/Persone'
 import { priorityEnum } from '../../@types/enums'
 import { useFillActions } from '../../CustomHooks/useFillActions'
 import { useFillPersons } from '../../CustomHooks/useFillPersons'
-import { motion, useDragControls } from 'framer-motion'
 
 interface NewTaskProps {
     newTaskModalState: boolean
@@ -72,7 +71,7 @@ export const NewTask: FC<NewTaskProps> = ({
         <PropertyToDoContext.Provider
             value={{ propertyToDo, setProppertyToDo }}
         >
-            <motion.div
+            <div
                 //ref={ref}
                 //drag='y'
                 //dragControls={dragControls}
@@ -107,7 +106,7 @@ export const NewTask: FC<NewTaskProps> = ({
                     <Persone />
                     <Buttons setNewTaskModalState={setNewTaskModalState} />
                 </div>
-            </motion.div>
+            </div>
         </PropertyToDoContext.Provider>
     )
 }

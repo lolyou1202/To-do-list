@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/To-do-list/static/css/main.b5ce3195.css",
+    "main.js": "/To-do-list/static/js/main.97a17ccf.js",
+    "static/media/person-5.jpg": "/To-do-list/static/media/person-5.c7f7e9a8b63d013fa206.jpg",
+    "static/media/person-4.jpg": "/To-do-list/static/media/person-4.af0a599a05748b222aae.jpg",
+    "static/media/person-2.jpg": "/To-do-list/static/media/person-2.88f8776e784d49b1ecc4.jpg",
+    "static/media/person-3.jpg": "/To-do-list/static/media/person-3.16541bea2ad685714054.jpg",
+    "static/media/person-1.jpg": "/To-do-list/static/media/person-1.69f745a8bc0aabdb2d68.jpg",
+    "static/media/calendar-ico.svg": "/To-do-list/static/media/calendar-ico.7b3bbd0db9199a30f32613d918dfce39.svg",
+    "static/media/search-ico.svg": "/To-do-list/static/media/search-ico.437b05d538e29e507e47ed783ca0ee14.svg",
+    "index.html": "/To-do-list/index.html",
+    "static/media/close-ico.svg": "/To-do-list/static/media/close-ico.a6de4c3cb374cdadd4a162964559a91d.svg",
+    "static/media/plus-ico.svg": "/To-do-list/static/media/plus-ico.35a2d244ef6a9a0d054a2470771ee2d4.svg",
+    "static/media/arrow-left-icon.svg": "/To-do-list/static/media/arrow-left-icon.e868e76e5d9c4970a5119be791f46d5c.svg",
+    "static/media/arrow-right-icon.svg": "/To-do-list/static/media/arrow-right-icon.aabcd63811bd72d24b1510f3e22c1fd7.svg",
+    "main.b5ce3195.css.map": "/To-do-list/static/css/main.b5ce3195.css.map",
+    "main.97a17ccf.js.map": "/To-do-list/static/js/main.97a17ccf.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b5ce3195.css",
+    "static/js/main.97a17ccf.js"
+  ]
+}
